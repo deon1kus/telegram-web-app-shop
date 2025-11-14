@@ -1,14 +1,8 @@
-import { QueryCache } from "@tanstack/react-query";
 import { Divider } from "antd";
 import { Link } from "react-router-dom";
 
 function Boxes() {
-  // eslint-disable-next-line prettier/prettier
-  const queryCache = new QueryCache();
-
-  const query = queryCache.findAll(["user-info"]);
-
-  console.log(query);
+  // Убрано использование QueryCache для производительности
   const itemClass =
     "w-full h-16 border-2 flex gap-3 border-[var(--tg-theme-button-color)] border-opacity-80 items-center justify-center rounded-lg  ";
   return (

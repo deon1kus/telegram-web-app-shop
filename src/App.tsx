@@ -18,24 +18,35 @@ function App() {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnWindowFocus: true,
+        refetchOnWindowFocus: false, // Отключаем для производительности
         refetchOnMount: true,
-        refetchOnReconnect: true,
-        retry: false,
-        staleTime: 5 * 60 * 1000
+        refetchOnReconnect: false, // Отключаем для производительности
+        retry: 1, // Одна попытка повтора
+        retryDelay: 1000, // Задержка 1 секунда
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000, // Время кеширования
+        // Таймаут для запросов
+        networkMode: 'online'
       }
     }
   });
 
   useEffect(() => {
+    // Быстрая инициализация - не ждем Telegram
+    const initTimer = setTimeout(() => {
+      setIsReady(true);
+    }, 100);
+
     if (tgApp) {
-      tgApp.ready();
-      tgApp.expand();
-      setIsReady(true);
-    } else {
-      // Если не в Telegram, все равно показываем приложение для разработки
-      setIsReady(true);
+      try {
+        tgApp.ready();
+        tgApp.expand();
+      } catch (error) {
+        console.warn('Telegram WebApp initialization error:', error);
+      }
     }
+
+    return () => clearTimeout(initTimer);
   }, [tgApp]);
 
   if (!isReady) {

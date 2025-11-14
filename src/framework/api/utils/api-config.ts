@@ -6,7 +6,10 @@ const Api = axios.create({
   baseURL: VITE_API_URL ? `${VITE_API_URL}/api` : '/api',
   headers: {
     Accept: "*/*"
-  }
+  },
+  // Таймауты для предотвращения долгого ожидания
+  timeout: 10000, // 10 секунд
+  timeoutErrorMessage: 'Запрос превысил время ожидания. Проверьте подключение к интернету.'
 })
 
 Api.interceptors.request.use(

@@ -4,7 +4,7 @@ import { useGetProducts } from "@framework/api/product/get";
 import { Divider } from "antd";
 
 function ProductNews() {
-  const { data, isLoading, isFetching } = useGetProducts({
+  const { data, isLoading, isFetching, isError } = useGetProducts({
     limit: 6,
     sortBy: "Updated_At"
   });
@@ -19,10 +19,18 @@ function ProductNews() {
       <div className="grid grid-cols-2  gap-2">
         {isLoading || isFetching ? (
           <>
-            {[...Array(8)].map((_, idx) => (
-              <ProductCardSkeleton delay={idx} />
+            {[...Array(4)].map((_, idx) => (
+              <ProductCardSkeleton key={`skeleton-${idx}`} delay={idx} />
             ))}
           </>
+        ) : isError ? (
+          <div className="col-span-2 text-center p-4 text-gray-500">
+            Не удалось загрузить товары
+          </div>
+        ) : products.length === 0 ? (
+          <div className="col-span-2 text-center p-4 text-gray-500">
+            Товары не найдены
+          </div>
         ) : (
           products.map((item) => (
             <Card

@@ -1,17 +1,32 @@
 import { useGetSliders } from "@framework/api/slider/get";
-import { Carousel } from "antd";
+import { Carousel, Spin } from "antd";
 
 function HeroSlider() {
-  const { data } = useGetSliders();
-  return data?.length === 0 ? (
-    <span />
-  ) : (
+  const { data, isLoading, isError } = useGetSliders();
+  
+  // Показываем загрузку только если данные еще не загружены и нет ошибки
+  if (isLoading && !data) {
+    return (
+      <div className="h-[160px] w-full flex items-center justify-center bg-[var(--tg-theme-secondary-bg-color)] rounded-lg">
+        <Spin size="large" />
+      </div>
+    );
+  }
+
+  if (isError || !data || data.length === 0) {
+    return null;
+  }
+
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+  const imageBaseUrl = apiUrl ? `${apiUrl}/` : '/';
+
+  return (
     <Carousel rootClassName="rounded-lg overflow-hidden" autoplay>
-      {(data || []).map((item, idx) => (
+      {data.map((item, idx) => (
         <div key={idx} className="h-[160px] w-full">
-          <a href={item.url}>
+          <a href={item.url || '#'}>
             <img
-              src={`${import.meta.env.VITE_API_URL}/${item.photo_Path}`}
+              src={`${imageBaseUrl}${item.photo_Path}`}
               alt="slider"
               className="w-full h-full object-cover"
               style={{ 
@@ -20,6 +35,11 @@ function HeroSlider() {
                 height: 'auto'
               }}
               loading="lazy"
+              onError={(e) => {
+                // Обработка ошибок загрузки изображений
+                console.warn('Failed to load slider image:', item.photo_Path);
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
             />
           </a>
         </div>
