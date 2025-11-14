@@ -16,7 +16,17 @@ Api.interceptors.request.use(
 
 Api.interceptors.response.use(
   (response) => response,
-  (err) => Promise.reject(err)
+  (err) => {
+    // Логируем ошибки для отладки
+    if (err.response) {
+      console.error('API Error:', err.response.status, err.response.data);
+    } else if (err.request) {
+      console.error('API Request Error:', 'Нет ответа от сервера. Проверьте подключение к интернету и URL API.');
+    } else {
+      console.error('API Error:', err.message);
+    }
+    return Promise.reject(err);
+  }
 )
 
 export default Api

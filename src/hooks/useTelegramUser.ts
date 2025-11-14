@@ -14,14 +14,26 @@ export interface TypeTGWebAppData {
   user: TGUser;
 }
 const useTelegramUser = () => {
-  const { tgWebAppData } = JSON.parse(
-    sessionStorage.getItem("__telegram__initParams") || ""
-  );
-  const TGparse = qs.parse(tgWebAppData);
   try {
-    const user: TGUser = JSON.parse(TGparse.user);
+    const initParamsStr = sessionStorage.getItem("__telegram__initParams");
+    if (!initParamsStr) {
+      return null;
+    }
+    
+    const initParams = JSON.parse(initParamsStr);
+    if (!initParams || !initParams.tgWebAppData) {
+      return null;
+    }
+    
+    const TGparse = qs.parse(initParams.tgWebAppData);
+    if (!TGparse || !TGparse.user) {
+      return null;
+    }
+    
+    const user: TGUser = JSON.parse(TGparse.user as string);
     return user;
-  } catch {
+  } catch (error) {
+    console.error("Error parsing Telegram user data:", error);
     return null;
   }
 };
