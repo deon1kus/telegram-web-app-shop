@@ -42,13 +42,15 @@ function App() {
     return <div style={{ padding: "20px", textAlign: "center" }}>Загрузка...</div>;
   }
 
-  if (!isTG && !tgApp) {
-    return (
-      <div style={{ padding: "20px", textAlign: "center" }}>
-        Пожалуйста, откройте приложение в Telegram
-      </div>
-    );
-  }
+  // Для разработки и тестирования разрешаем работу вне Telegram
+  // В продакшене можно вернуть проверку
+  // if (!isTG && !tgApp) {
+  //   return (
+  //     <div style={{ padding: "20px", textAlign: "center" }}>
+  //       Пожалуйста, откройте приложение в Telegram
+  //     </div>
+  //   );
+  // }
 
   return (
     <QueryClientProvider client={queryClient}>

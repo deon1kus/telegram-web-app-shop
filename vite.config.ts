@@ -11,6 +11,11 @@ export default defineConfig({
     port: 3000
   },
   build: {
-    minify: "terser"
-  }
+    minify: "terser",
+    // Убеждаемся, что пути правильные для деплоя
+    assetsDir: "assets",
+    outDir: "dist"
+  },
+  // Base path для правильной работы на Netlify
+  base: "/"
 });

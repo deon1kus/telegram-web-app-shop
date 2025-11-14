@@ -7,19 +7,21 @@
   [build.environment]
     NODE_VERSION = "18"
 
-# Настройки для SPA (Single Page Application)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 # Проксирование API запросов на ваш сервер
+# ВАЖНО: Должно быть ПЕРЕД редиректом для SPA
 # Все запросы к /api/* будут проксироваться на ваш сервер через HTTPS
 [[redirects]]
   from = "/api/*"
   to = "http://194.87.0.193/api/:splat"
   status = 200
   force = true
+
+# Настройки для SPA (Single Page Application)
+# ВАЖНО: Должно быть ПОСЛЕДНИМ, иначе перехватит все запросы
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 # Заголовки безопасности
 [[headers]]
