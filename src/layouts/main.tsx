@@ -19,8 +19,16 @@ function Main({ children }: Props) {
     </div>
   );
   return (
-    <div className="app w-full py-1">
-      <div className="w-full !max-w-[450px]">
+    <div 
+      className="app w-full"
+      style={{
+        minHeight: 'var(--tg-viewport-stable-height, 100vh)',
+        height: 'var(--tg-viewport-stable-height, 100vh)',
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch'
+      }}>
+      <div className="w-full mx-auto" style={{ maxWidth: '450px', width: '100%' }}>
         <ConfigProvider
           direction="rtl"
           locale={fa_IR}

@@ -30,7 +30,11 @@
 
 body {
   margin: 0;
-  padding: 20px 20px;
+  padding: 0;
+  /* Используем viewport height от Telegram Web App */
+  min-height: var(--tg-viewport-height, 100vh);
+  height: var(--tg-viewport-height, 100vh);
+  overflow-x: hidden;
 
   font-family: "iransans";
 
@@ -38,6 +42,9 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Предотвращаем zoom на двойной тап на iOS */
+  touch-action: pan-y;
 }
 
 code,
@@ -71,19 +78,66 @@ label {
 
 .contentWrapper {
   box-sizing: border-box;
-  margin: 5px 0;
-  padding: 20px;
+  margin: 0;
+  /* Адаптивный padding для мобильных */
+  padding: clamp(8px, 2vw, 16px) clamp(12px, 3vw, 20px);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 
   color: var(--tg-theme-text-color) !important;
 
   background: var(--tg-theme-bg-color);
   border-radius: 10px;
+  
+  /* Используем viewport height от Telegram */
+  min-height: var(--tg-viewport-stable-height, auto);
+}
+
+/* Медиа-запрос для больших экранов */
+@media (min-width: 450px) {
+  .contentWrapper {
+    padding: 20px;
+    margin: 5px 0;
+  }
 }
 
 .ant-input,
 .ant-select,
 .ant-select-item {
   background-color: unset !important;
+}
+
+/* Дополнительные стили для мобильных устройств */
+#root {
+  width: 100%;
+  min-height: var(--tg-viewport-stable-height, 100vh);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Предотвращаем горизонтальный скролл */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Улучшаем отображение изображений на мобильных */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Улучшаем скроллинг на iOS */
+@media (max-width: 450px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .contentWrapper {
+    padding: 10px 12px;
+  }
 }
 
 @keyframes App-logo-spin {

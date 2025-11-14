@@ -1,12 +1,19 @@
 .app {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-
-  // min-height: 100vh;
+  width: 100%;
+  min-height: var(--tg-viewport-stable-height, 100vh);
+  height: var(--tg-viewport-stable-height, 100vh);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   color: white;
   text-align: center;
+  
+  /* Предотвращаем горизонтальный скролл */
+  position: relative;
 }
 .app-logo {
   pointer-events: none;
