@@ -198,7 +198,7 @@ function ProductList({ pageType }: Props) {
       <Divider />
       {/* <Suspense fallback={<ProductsSkeleton />}> */}
       {/* <ProductsSkeleton /> */}
-      <div className="mb-10 flex flex-wrap gap-3">
+      <div className="mb-10 grid grid-cols-2 gap-3">
         {isLoading || isFetching ? (
           <ProductsSkeleton />
         ) : error ? (
