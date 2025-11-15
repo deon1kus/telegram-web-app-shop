@@ -42,12 +42,12 @@ function App() {
         try {
           tgApp.ready();
           tgApp.expand();
-          // Устанавливаем цветовую схему для киберпанк темы
+          // Устанавливаем цветовую схему для светлой темы
           if (tgApp.setHeaderColor) {
-            tgApp.setHeaderColor('#0a0a0f');
+            tgApp.setHeaderColor('#ffffff');
           }
           if (tgApp.setBackgroundColor) {
-            tgApp.setBackgroundColor('#0a0a0f');
+            tgApp.setBackgroundColor('#ffffff');
           }
         } catch (error) {
           // Ошибка инициализации Telegram не критична
@@ -81,8 +81,8 @@ function App() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%)",
-        color: "#00ff88",
+        background: "#ffffff",
+        color: "#000000",
         fontFamily: "Inter, Roboto, system-ui, sans-serif"
       }}>
         <div>
@@ -90,13 +90,13 @@ function App() {
             marginBottom: "10px",
             fontSize: "18px",
             fontWeight: "600",
-            textShadow: "0 0 10px rgba(0, 255, 136, 0.5)"
+            color: "#000000"
           }}>
             Загрузка...
           </div>
           <div style={{ 
             fontSize: "12px", 
-            color: "#8b8b9e",
+            color: "#666666",
             marginTop: "10px"
           }}>
             Если загрузка не завершается, проверьте консоль браузера

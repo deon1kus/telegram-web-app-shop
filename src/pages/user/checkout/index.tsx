@@ -102,8 +102,8 @@ function Checkout() {
                       unicodeBidi: 'bidi-override',
                       direction: 'ltr',
                       letterSpacing: '2px',
-                      color: '#00ff88',
-                      textShadow: '0 0 10px rgba(0, 255, 136, 0.5)'
+                      color: '#000000',
+                      fontWeight: '600'
                     }}>{personCart.cartNumber}</span>
                   </div>
                   <Button>Копировать</Button>

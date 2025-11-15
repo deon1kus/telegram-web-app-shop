@@ -5,23 +5,21 @@
 /* Импорт киберпанк стилей */
 @import './cyberpunk.css';
 
-/* Киберпанк цветовая схема */
+/* Светлая цветовая схема */
 :root {
-  --tg-theme-bg-color: #0a0a0f;
-  --tg-theme-text-color: #00ff88;
-  --tg-theme-hint-color: #8b8b9e;
-  --tg-theme-link-color: #00d4ff;
-  --tg-theme-button-color: #ff0080;
+  --tg-theme-bg-color: #ffffff;
+  --tg-theme-text-color: #000000;
+  --tg-theme-hint-color: #666666;
+  --tg-theme-link-color: #1890ff;
+  --tg-theme-button-color: #1890ff;
   --tg-theme-button-text-color: #ffffff;
-  --tg-theme-secondary-bg-color: #1a1a2e;
+  --tg-theme-secondary-bg-color: #f5f5f5;
 
-  /* Киберпанк акценты */
-  --cyberpunk-neon-green: #00ff88;
-  --cyberpunk-neon-pink: #ff0080;
-  --cyberpunk-neon-cyan: #00d4ff;
-  --cyberpunk-dark: #0a0a0f;
-  --cyberpunk-dark-secondary: #1a1a2e;
-  --cyberpunk-dark-tertiary: #16213e;
+  /* Акценты */
+  --primary-color: #1890ff;
+  --secondary-color: #52c41a;
+  --danger-color: #ff4d4f;
+  --warning-color: #faad14;
 
   --default-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Inter", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
 }
@@ -55,8 +53,8 @@ body {
   /* Популярный шрифт вместо iransans */
   font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Киберпанк темный фон */
-  background: linear-gradient(135deg, var(--cyberpunk-dark) 0%, var(--cyberpunk-dark-secondary) 100%);
+  /* Белый фон */
+  background: #ffffff;
   background-attachment: fixed;
 
   -webkit-font-smoothing: antialiased;
@@ -65,8 +63,8 @@ body {
   /* Предотвращаем zoom на двойной тап на iOS */
   touch-action: pan-y;
   
-  /* Киберпанк эффект свечения текста */
-  color: var(--cyberpunk-neon-green);
+  /* Черный текст */
+  color: #000000;
 }
 
 code,
@@ -116,13 +114,13 @@ div {
   max-width: 100%;
   overflow-x: hidden;
 
-  color: var(--cyberpunk-neon-green) !important;
+  color: #000000 !important;
 
-  /* Киберпанк темный фон с градиентом */
-  background: linear-gradient(135deg, var(--cyberpunk-dark-secondary) 0%, var(--cyberpunk-dark-tertiary) 100%);
-  border-radius: 12px;
-  border: 1px solid rgba(0, 255, 136, 0.2);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05);
+  /* Белый фон */
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   
   /* Используем viewport height от Telegram */
   min-height: var(--tg-viewport-stable-height, auto);
