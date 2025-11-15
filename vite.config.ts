@@ -23,7 +23,9 @@ export default defineConfig({
           // Разделяем node_modules на отдельные чанки
           if (id.includes('node_modules')) {
             // React и React DOM должны быть вместе и загружаться первыми
-            if (id.includes('react') || id.includes('react-dom')) {
+            // ВАЖНО: React должен быть в одном чанке с react-dom
+            if (id.includes('react/') || id.includes('react-dom/') || 
+                id.includes('/react') || id.includes('/react-dom')) {
               return 'react-vendor';
             }
             // React Router отдельно, но после React
@@ -39,7 +41,10 @@ export default defineConfig({
               return 'antd-vendor';
             }
             // Остальные node_modules в отдельный чанк
-            return 'vendor';
+            // НО только если это не React зависимости
+            if (!id.includes('react') && !id.includes('scheduler')) {
+              return 'vendor';
+            }
           }
         },
         // Оптимизация имен файлов
