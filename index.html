@@ -18,7 +18,20 @@
     <title>PTI7</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="padding: 20px; text-align: center; font-family: system-ui, -apple-system, sans-serif;">
+        <div>Загрузка приложения...</div>
+        <div style="font-size: 12px; color: #999; margin-top: 10px;">
+          Если страница не загружается, проверьте консоль браузера (F12)
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
+    <noscript>
+      <div style="padding: 20px; text-align: center;">
+        <h2>JavaScript отключен</h2>
+        <p>Для работы приложения необходимо включить JavaScript в настройках браузера.</p>
+      </div>
+    </noscript>
   </body>
 </html>

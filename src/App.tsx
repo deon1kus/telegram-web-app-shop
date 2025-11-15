@@ -54,7 +54,23 @@ function App() {
   }, [tgApp]);
 
   if (!isReady) {
-    return <div style={{ padding: "20px", textAlign: "center" }}>Загрузка...</div>;
+    return (
+      <div style={{ 
+        padding: "20px", 
+        textAlign: "center",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }}>
+        <div>
+          <div style={{ marginBottom: "10px" }}>Загрузка...</div>
+          <div style={{ fontSize: "12px", color: "#999" }}>
+            Если загрузка не завершается, проверьте консоль браузера (F12)
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // Для разработки и тестирования разрешаем работу вне Telegram
