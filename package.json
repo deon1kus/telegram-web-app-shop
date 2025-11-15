@@ -16,7 +16,8 @@
     "test-channel-parser": "node scripts/test-channel-parser.js",
     "test-real-message": "node scripts/test-real-message.js",
     "get-channel-message": "node scripts/get-channel-message-cjs.js",
-    "test-notification-format": "node scripts/test-notification-format.js"
+    "test-notification-format": "node scripts/test-notification-format.js",
+    "test-all": "node scripts/test-all-systems.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
