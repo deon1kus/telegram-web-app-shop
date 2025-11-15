@@ -1,17 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
-  --tg-theme-bg-color: #fff;
-  --tg-theme-text-color: #0a0a0a;
-  --tg-theme-hint-color: #929292;
-  --tg-theme-link-color: #207ae4;
-  --tg-theme-button-color: #5bc8fb;
-  --tg-theme-button-text-color: #fffeec;
-  --tg-theme-secondary-bg-color: #f3f2f9;
 
-  --default-font: -apple-system, "Vazirmatn";
+/* Импорт киберпанк стилей */
+@import './cyberpunk.css';
+
+/* Киберпанк цветовая схема */
+:root {
+  --tg-theme-bg-color: #0a0a0f;
+  --tg-theme-text-color: #00ff88;
+  --tg-theme-hint-color: #8b8b9e;
+  --tg-theme-link-color: #00d4ff;
+  --tg-theme-button-color: #ff0080;
+  --tg-theme-button-text-color: #ffffff;
+  --tg-theme-secondary-bg-color: #1a1a2e;
+
+  /* Киберпанк акценты */
+  --cyberpunk-neon-green: #00ff88;
+  --cyberpunk-neon-pink: #ff0080;
+  --cyberpunk-neon-cyan: #00d4ff;
+  --cyberpunk-dark: #0a0a0f;
+  --cyberpunk-dark-secondary: #1a1a2e;
+  --cyberpunk-dark-tertiary: #16213e;
+
+  --default-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Inter", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
 }
+
+/* Популярные шрифты */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 
 @font-face {
   font-family: "iransans";
@@ -36,23 +52,38 @@ body {
   height: var(--tg-viewport-height, 100vh);
   overflow-x: hidden;
 
-  font-family: "iransans";
+  /* Популярный шрифт вместо iransans */
+  font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  background: var(--tg-theme-secondary-bg-color);
+  /* Киберпанк темный фон */
+  background: linear-gradient(135deg, var(--cyberpunk-dark) 0%, var(--cyberpunk-dark-secondary) 100%);
+  background-attachment: fixed;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
   /* Предотвращаем zoom на двойной тап на iOS */
   touch-action: pan-y;
+  
+  /* Киберпанк эффект свечения текста */
+  color: var(--cyberpunk-neon-green);
 }
 
 code,
 label,
 span,
-div,
-label {
-  font-family: "iransans";
+div {
+  font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Номер карты всегда латинскими цифрами */
+.card-number {
+  font-family: 'Courier New', 'Monaco', 'Menlo', monospace !important;
+  font-variant-numeric: normal !important;
+  unicode-bidi: bidi-override !important;
+  direction: ltr !important;
+  font-feature-settings: normal !important;
+  letter-spacing: 1px;
 }
 
 .App-logo {
@@ -85,10 +116,13 @@ label {
   max-width: 100%;
   overflow-x: hidden;
 
-  color: var(--tg-theme-text-color) !important;
+  color: var(--cyberpunk-neon-green) !important;
 
-  background: var(--tg-theme-bg-color);
-  border-radius: 10px;
+  /* Киберпанк темный фон с градиентом */
+  background: linear-gradient(135deg, var(--cyberpunk-dark-secondary) 0%, var(--cyberpunk-dark-tertiary) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05);
   
   /* Используем viewport height от Telegram */
   min-height: var(--tg-viewport-stable-height, auto);

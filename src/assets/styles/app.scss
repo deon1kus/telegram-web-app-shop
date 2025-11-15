@@ -9,11 +9,32 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
-  color: white;
+  /* Киберпанк цвет текста */
+  color: var(--cyberpunk-neon-green);
   text-align: center;
+  
+  /* Киберпанк фон */
+  background: linear-gradient(135deg, var(--cyberpunk-dark) 0%, var(--cyberpunk-dark-secondary) 50%, var(--cyberpunk-dark-tertiary) 100%);
+  background-attachment: fixed;
   
   /* Предотвращаем горизонтальный скролл */
   position: relative;
+  
+  /* Киберпанк эффект свечения */
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 .app-logo {
   pointer-events: none;

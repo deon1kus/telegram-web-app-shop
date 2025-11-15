@@ -1,0 +1,210 @@
+/* Киберпанк стили для компонентов */
+
+/* Кнопки в стиле киберпанк */
+.ant-btn {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s ease !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+}
+
+.ant-btn-primary {
+  background: linear-gradient(135deg, var(--cyberpunk-neon-pink) 0%, #ff0066 100%) !important;
+  border: 1px solid var(--cyberpunk-neon-pink) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 0, 128, 0.4), inset 0 0 20px rgba(255, 0, 128, 0.1) !important;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background: linear-gradient(135deg, #ff0066 0%, var(--cyberpunk-neon-pink) 100%) !important;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.6), inset 0 0 30px rgba(255, 0, 128, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+.ant-btn-default {
+  background: rgba(0, 212, 255, 0.1) !important;
+  border: 1px solid var(--cyberpunk-neon-cyan) !important;
+  color: var(--cyberpunk-neon-cyan) !important;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3) !important;
+}
+
+.ant-btn-default:hover,
+.ant-btn-default:focus {
+  background: rgba(0, 212, 255, 0.2) !important;
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+.ant-btn-danger {
+  background: linear-gradient(135deg, #ff1744 0%, #d50000 100%) !important;
+  border: 1px solid #ff1744 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 23, 68, 0.4) !important;
+}
+
+/* Input поля в стиле киберпанк */
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-select-selector {
+  background: rgba(26, 26, 46, 0.8) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  color: var(--cyberpunk-neon-green) !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--cyberpunk-neon-green) !important;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4) !important;
+  background: rgba(26, 26, 46, 1) !important;
+}
+
+.ant-input::placeholder,
+.ant-select-selection-placeholder {
+  color: rgba(139, 139, 158, 0.6) !important;
+}
+
+/* Select в стиле киберпанк */
+.ant-select-dropdown {
+  background: var(--cyberpunk-dark-secondary) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.3) !important;
+}
+
+.ant-select-item {
+  color: var(--cyberpunk-neon-green) !important;
+}
+
+.ant-select-item-option-selected {
+  background: rgba(0, 255, 136, 0.2) !important;
+  color: var(--cyberpunk-neon-green) !important;
+}
+
+.ant-select-item-option:hover {
+  background: rgba(0, 255, 136, 0.1) !important;
+}
+
+/* Alert в стиле киберпанк */
+.ant-alert {
+  border-radius: 12px !important;
+  border: 1px solid !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.ant-alert-info {
+  background: rgba(0, 212, 255, 0.1) !important;
+  border-color: var(--cyberpunk-neon-cyan) !important;
+  color: var(--cyberpunk-neon-cyan) !important;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2) !important;
+}
+
+.ant-alert-warning {
+  background: rgba(255, 193, 7, 0.1) !important;
+  border-color: #ffc107 !important;
+  color: #ffc107 !important;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.2) !important;
+}
+
+.ant-alert-success {
+  background: rgba(0, 255, 136, 0.1) !important;
+  border-color: var(--cyberpunk-neon-green) !important;
+  color: var(--cyberpunk-neon-green) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2) !important;
+}
+
+/* Form в стиле киберпанк */
+.ant-form-item-label > label {
+  color: var(--cyberpunk-neon-green) !important;
+  font-weight: 500 !important;
+}
+
+.ant-form-item-label > label.ant-form-item-required::before {
+  color: var(--cyberpunk-neon-pink) !important;
+}
+
+/* Card в стиле киберпанк */
+.ant-card {
+  background: rgba(26, 26, 46, 0.8) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1) !important;
+}
+
+/* List в стиле киберпанк */
+.ant-list-item {
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2) !important;
+  color: var(--cyberpunk-neon-green) !important;
+}
+
+.ant-list-item:hover {
+  background: rgba(0, 255, 136, 0.05) !important;
+}
+
+/* Spin в стиле киберпанк */
+.ant-spin-dot-item {
+  background-color: var(--cyberpunk-neon-green) !important;
+}
+
+/* Message в стиле киберпанк */
+.ant-message {
+  z-index: 9999 !important;
+}
+
+.ant-message-notice-content {
+  background: var(--cyberpunk-dark-secondary) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3) !important;
+  color: var(--cyberpunk-neon-green) !important;
+  border-radius: 8px !important;
+}
+
+/* Popconfirm в стиле киберпанк */
+.ant-popover-inner {
+  background: var(--cyberpunk-dark-secondary) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.3) !important;
+}
+
+.ant-popover-inner-content {
+  color: var(--cyberpunk-neon-green) !important;
+}
+
+/* Scrollbar в стиле киберпанк */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cyberpunk-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 136, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 136, 0.7);
+}
+
+/* Анимация свечения для текста */
+@keyframes cyberpunk-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 30px rgba(0, 255, 136, 0.5);
+  }
+}
+
+.cyberpunk-glow {
+  animation: cyberpunk-glow 2s ease-in-out infinite;
+}
+

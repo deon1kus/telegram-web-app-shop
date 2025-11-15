@@ -95,7 +95,17 @@ function Checkout() {
                     navigator.clipboard.writeText(personCart.cartNumber);
                     message.success("Номер карты скопирован");
                   }}>
-                  <div>Номер карты: {personCart.cartNumber}</div>
+                  <div>
+                    Номер карты: <span className="card-number" style={{ 
+                      fontFamily: "'Courier New', 'Monaco', 'Menlo', monospace",
+                      fontVariantNumeric: 'normal',
+                      unicodeBidi: 'bidi-override',
+                      direction: 'ltr',
+                      letterSpacing: '2px',
+                      color: '#00ff88',
+                      textShadow: '0 0 10px rgba(0, 255, 136, 0.5)'
+                    }}>{personCart.cartNumber}</span>
+                  </div>
                   <Button>Копировать</Button>
                 </div>
                 <br />
