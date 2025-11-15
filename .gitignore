@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+channel-integration-steps.log
+channel-message-result.json
 
 # Dependencies
 node_modules
