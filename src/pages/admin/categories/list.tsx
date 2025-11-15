@@ -17,7 +17,8 @@ const { confirm } = Modal;
 function List() {
   const { data, error, isLoading, isFetching, refetch } = useGetCategories({});
   const mutationDelete = useDeleteCategories();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const navigate = useNavigate();
 
   const customizeData = () => {

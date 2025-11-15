@@ -21,7 +21,8 @@ function Checkout() {
   const [images, setImages] = useState([]);
   const [imagesLoading, setImagesLoading] = useState(false);
   const [receiptPhoto, setReceiptPhoto] = useState<null | string>(null);
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { state: locState } = useLocation();
   const navigate = useNavigate();
   const mutationPhotos = useAddReceiptPhotos();

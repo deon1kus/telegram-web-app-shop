@@ -22,7 +22,8 @@ interface Props {
 }
 
 function OrderList({ type }: Props) {
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const location = useLocation();
   const { data, isLoading, isFetching, refetch } = useGetOrderByUser({
     user_id: id

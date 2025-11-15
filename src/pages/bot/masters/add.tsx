@@ -18,7 +18,8 @@ function Add() {
   const [priceEnterd, setPriceEnterd] = useState<number>(0);
   const mutation = useAddMaster();
   const mutationUploadPhotos = useAddMasterImage();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [imageLinkList, setImageLinkList] = useState<Array<string>>([]);

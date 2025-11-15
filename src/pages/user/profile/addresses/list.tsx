@@ -13,7 +13,8 @@ import { useLocation, useNavigate } from "react-router";
 
 function AddessesList() {
   const navigate = useNavigate();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isLoading, isFetching, refetch } = useGetAddresses(id);
   const deleteMutation = useDeleteAddress();
   const location = useLocation();

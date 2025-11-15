@@ -34,7 +34,8 @@ function Add() {
   } = useGetCategories({});
   const mutation = useAddProduct();
   const mutationUploadPhotos = useAddProductImage();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const [form] = Form.useForm();
   const navigate = useNavigate();
   useEffect(() => {

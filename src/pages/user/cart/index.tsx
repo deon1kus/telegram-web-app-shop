@@ -14,7 +14,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 function Cart() {
   const clearCartMutation = useClearCart();
   const delCartItemMutation = useDeleteCartItem();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isFetching, isLoading, refetch } = useGetCarts(id);
   const [openClearModal, setOpenClearModal] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);

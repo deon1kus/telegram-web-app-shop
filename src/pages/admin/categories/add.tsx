@@ -16,7 +16,8 @@ interface FromProps {
 function CategoriesAdd() {
   const [form] = Form.useForm();
   const mutation = useAddCategories();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   // const { data, refetch, isLoading, isFetching } = useGetCategories();
   // const isLoadCategories = isLoading || isFetching;
   const { parentId } = useParams();

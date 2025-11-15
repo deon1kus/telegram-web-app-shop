@@ -13,7 +13,8 @@ import TextArea from "antd/es/input/TextArea";
 
 function BotSetting() {
   const mutation = useUpdateBotSetting();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isFetching, isLoading, refetch } = useGetBotSetting();
   const loading = isFetching || isLoading;
   return (

@@ -25,7 +25,8 @@ interface Props {
 }
 
 function Discount({ type, id, data }: Props) {
-  const { id: userId } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const userId = telegramUser?.id;
   const mutation = useAddDiscounts();
   const updateMutation = useUpdateDiscount({
     discount_id: data?.discount_Id || ""

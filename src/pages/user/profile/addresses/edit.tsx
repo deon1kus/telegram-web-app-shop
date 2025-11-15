@@ -15,7 +15,8 @@ function EditAddress() {
   const navigate = useNavigate();
   const { address_id } = useParams();
   const mutation = useUpdateAddress();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isFetching, refetch, isLoading } = useGetAddresses(
     id,
     address_id
