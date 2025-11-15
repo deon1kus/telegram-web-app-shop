@@ -19,6 +19,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Разделение vendor и app кода для лучшей загрузки
+        // ВАЖНО: Упрощенное разделение для предотвращения ошибки useState
         manualChunks: (id) => {
           // Разделяем node_modules на отдельные чанки
           if (id.includes('node_modules')) {
@@ -39,34 +40,23 @@ export default defineConfig({
             if (id.includes('antd')) {
               return 'antd-vendor';
             }
-            // ВАЖНО: Исключаем из vendor все что может использовать React
+            // ВАЖНО: Исключаем из vendor ВСЕ что может использовать React
             // Это критично для предотвращения ошибки "Cannot read properties of undefined (reading 'useState')"
-            // Список библиотек которые зависят от React и не должны быть в vendor
-            const reactDependentLibs = [
-              'react',
-              '@vkruglikov',
-              'react-telegram',
-              'react-images',
-              'formik',
-              'jotai',
-              'yup'
-            ];
-            
-            const isReactDependent = reactDependentLibs.some(lib => id.includes(lib));
+            // Проверяем что это точно не React зависимость
+            const isReactRelated = id.includes('react') || 
+                                 id.includes('scheduler') || 
+                                 id.includes('jsx-runtime') ||
+                                 id.includes('react/jsx') ||
+                                 id.includes('@vkruglikov') ||
+                                 id.includes('react-telegram') ||
+                                 id.includes('react-images') ||
+                                 id.includes('formik') ||
+                                 id.includes('jotai');
             
             // Только чистые библиотеки без React зависимостей идут в vendor
-            if (!isReactDependent) {
-              // Дополнительная проверка - исключаем все что может импортировать React
-              // Проверяем что это точно не React зависимость
-              const isReactRelated = id.includes('react') || 
-                                   id.includes('scheduler') || 
-                                   id.includes('jsx-runtime') ||
-                                   id.includes('react/jsx');
-              
-              if (!isReactRelated) {
-                // Только чистые библиотеки: axios, dayjs, query-string, clsx и т.д.
-                return 'vendor';
-              }
+            // Это: axios, dayjs, query-string, clsx, @persian-tools и т.д.
+            if (!isReactRelated) {
+              return 'vendor';
             }
             // Все остальное (с React зависимостями) идет в основной бандл (index)
             // чтобы гарантировать правильный порядок загрузки
