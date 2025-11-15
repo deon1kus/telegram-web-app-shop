@@ -40,6 +40,7 @@ export default defineConfig({
               return 'antd-vendor';
             }
             // ВАЖНО: Исключаем из vendor все что может использовать React
+            // Это критично для предотвращения ошибки "Cannot read properties of undefined (reading 'useState')"
             // Список библиотек которые зависят от React и не должны быть в vendor
             const reactDependentLibs = [
               'react',
@@ -48,7 +49,7 @@ export default defineConfig({
               'react-images',
               'formik',
               'jotai',
-              'yup' // может использоваться с React формами
+              'yup'
             ];
             
             const isReactDependent = reactDependentLibs.some(lib => id.includes(lib));
@@ -56,14 +57,20 @@ export default defineConfig({
             // Только чистые библиотеки без React зависимостей идут в vendor
             if (!isReactDependent) {
               // Дополнительная проверка - исключаем все что может импортировать React
-              if (!id.includes('react') && 
-                  !id.includes('scheduler') &&
-                  !id.includes('jsx-runtime')) {
+              // Проверяем что это точно не React зависимость
+              const isReactRelated = id.includes('react') || 
+                                   id.includes('scheduler') || 
+                                   id.includes('jsx-runtime') ||
+                                   id.includes('react/jsx');
+              
+              if (!isReactRelated) {
+                // Только чистые библиотеки: axios, dayjs, query-string, clsx и т.д.
                 return 'vendor';
               }
             }
-            // Все остальное (с React зависимостями) идет в основной бандл
+            // Все остальное (с React зависимостями) идет в основной бандл (index)
             // чтобы гарантировать правильный порядок загрузки
+            // Это включает: formik, jotai, react-images-uploading, @vkruglikov/react-telegram-web-app
           }
         },
         // Оптимизация имен файлов
