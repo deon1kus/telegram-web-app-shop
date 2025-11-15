@@ -40,21 +40,27 @@ export default defineConfig({
               return 'antd-vendor';
             }
             // ВАЖНО: Исключаем из vendor все что может использовать React
-            // Оставляем только чистые библиотеки без React зависимостей
-            // Это предотвращает ошибку "Cannot read properties of undefined (reading 'useState')"
+            // Список библиотек которые зависят от React и не должны быть в vendor
             const reactDependentLibs = [
               'react',
               '@vkruglikov',
               'react-telegram',
               'react-images',
               'formik',
-              'jotai'
+              'jotai',
+              'yup' // может использоваться с React формами
             ];
             
             const isReactDependent = reactDependentLibs.some(lib => id.includes(lib));
             
+            // Только чистые библиотеки без React зависимостей идут в vendor
             if (!isReactDependent) {
-              return 'vendor';
+              // Дополнительная проверка - исключаем все что может импортировать React
+              if (!id.includes('react') && 
+                  !id.includes('scheduler') &&
+                  !id.includes('jsx-runtime')) {
+                return 'vendor';
+              }
             }
             // Все остальное (с React зависимостями) идет в основной бандл
             // чтобы гарантировать правильный порядок загрузки
