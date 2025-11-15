@@ -1,10 +1,13 @@
 /* Светлые стили для компонентов */
 
-/* Кнопки */
+/* Кнопки - непрозрачный серый фон для всех кнопок */
 .ant-btn {
   border-radius: 6px !important;
   font-weight: 500 !important;
   transition: all 0.3s ease !important;
+  background: #e5e5e5 !important;
+  border: 1px solid #d0d0d0 !important;
+  color: #000000 !important;
 }
 
 .ant-btn-primary {
