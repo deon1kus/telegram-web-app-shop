@@ -8,60 +8,62 @@
 }
 
 .ant-btn-primary {
-  background: rgba(128, 128, 128, 0.2) !important;
-  border: 1px solid rgba(128, 128, 128, 0.3) !important;
+  background: #e5e5e5 !important;
+  border: 1px solid #d0d0d0 !important;
   color: #000000 !important;
-  backdrop-filter: blur(10px) !important;
 }
 
 .ant-btn-primary:hover,
 .ant-btn-primary:focus {
-  background: rgba(128, 128, 128, 0.3) !important;
-  border-color: rgba(128, 128, 128, 0.4) !important;
+  background: #d0d0d0 !important;
+  border-color: #b8b8b8 !important;
   transform: translateY(-1px) !important;
 }
 
 .ant-btn-default {
-  background: rgba(128, 128, 128, 0.2) !important;
-  border: 1px solid rgba(128, 128, 128, 0.3) !important;
+  background: #e5e5e5 !important;
+  border: 1px solid #d0d0d0 !important;
   color: #000000 !important;
-  backdrop-filter: blur(10px) !important;
 }
 
 .ant-btn-default:hover,
 .ant-btn-default:focus {
-  background: rgba(128, 128, 128, 0.3) !important;
-  border-color: rgba(128, 128, 128, 0.4) !important;
+  background: #d0d0d0 !important;
+  border-color: #b8b8b8 !important;
   transform: translateY(-1px) !important;
 }
 
 .ant-btn-danger {
-  background: rgba(255, 77, 79, 0.2) !important;
-  border: 1px solid rgba(255, 77, 79, 0.3) !important;
+  background: #ffcccc !important;
+  border: 1px solid #ff9999 !important;
   color: #000000 !important;
-  backdrop-filter: blur(10px) !important;
 }
 
 .ant-btn-danger:hover,
 .ant-btn-danger:focus {
-  background: rgba(255, 77, 79, 0.3) !important;
-  border-color: rgba(255, 77, 79, 0.4) !important;
+  background: #ff9999 !important;
+  border-color: #ff6666 !important;
 }
 
 .ant-btn-link {
-  background: transparent !important;
-  border: none !important;
+  background: #e5e5e5 !important;
+  border: 1px solid #d0d0d0 !important;
   color: #000000 !important;
+}
+
+.ant-btn-link:hover,
+.ant-btn-link:focus {
+  background: #d0d0d0 !important;
+  border-color: #b8b8b8 !important;
 }
 
 .ant-btn-ghost,
 .ant-btn-primary.ant-btn-ghost,
 .ant-btn-default.ant-btn-ghost,
 .ant-btn-danger.ant-btn-ghost {
-  background: rgba(128, 128, 128, 0.2) !important;
-  border: 1px solid rgba(128, 128, 128, 0.3) !important;
+  background: #e5e5e5 !important;
+  border: 1px solid #d0d0d0 !important;
   color: #000000 !important;
-  backdrop-filter: blur(10px) !important;
 }
 
 .ant-btn-ghost:hover,
@@ -69,9 +71,11 @@
 .ant-btn-primary.ant-btn-ghost:hover,
 .ant-btn-primary.ant-btn-ghost:focus,
 .ant-btn-default.ant-btn-ghost:hover,
-.ant-btn-default.ant-btn-ghost:focus {
-  background: rgba(128, 128, 128, 0.3) !important;
-  border-color: rgba(128, 128, 128, 0.4) !important;
+.ant-btn-default.ant-btn-ghost:focus,
+.ant-btn-danger.ant-btn-ghost:hover,
+.ant-btn-danger.ant-btn-ghost:focus {
+  background: #d0d0d0 !important;
+  border-color: #b8b8b8 !important;
 }
 
 /* Input поля */
