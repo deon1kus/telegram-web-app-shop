@@ -26,7 +26,8 @@
       "@helpers/*": ["./src/helpers/*"],
       "@containers/*": ["./src/containers/*"],
       "@framework/*": ["./src/framework/*"],
-      "@layout/*": ["./src/layout/*"]
+      "@layout/*": ["./src/layout/*"],
+      "@utils/*": ["./src/utils/*"]
     },
     "baseUrl": "."
   },
