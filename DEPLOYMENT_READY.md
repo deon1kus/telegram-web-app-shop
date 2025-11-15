@@ -157,6 +157,9 @@ Netlify автоматически:
 
 - **GitHub:** https://github.com/deon1kus/telegram-web-app-shop
 - **Netlify:** https://app.netlify.com/teams/deon1kus/projects
-- **Bot:** @JARVIS_SHEVA_bot
+- **Bot:** [@JARVIS_SHEVA_bot](https://t.me/JARVIS_SHEVA_bot)
+- **Bot Token:** `7811866862:AAH4z4mpba_o-fRCdgDv09Ej8nTy-QkzId8`
+- **Notifications Channel:** [Уведомления магазина](https://t.me/+vZtVvSSVltwzYmMy)
+- **Channel Chat ID:** `-1003018207910`
 - **Backend:** http://194.87.0.193
 
