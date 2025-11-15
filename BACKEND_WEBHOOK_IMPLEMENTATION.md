@@ -134,16 +134,22 @@ app.post('/api/telegram/webhook', async (req, res) => {
   "product_Name": "Новый iPhone 15 Pro Max",
   "price": 150000,
   "quantity": 5,
+  "product_sequence_id": 1,
   "telegram_message_id": 6
 }
 ```
 
 **Логика:**
-1. Найти категорию по `category_name` (если указана)
-2. Загрузить фото из Telegram по `photo_file_id` (если указан)
-3. Создать товар в базе данных
-4. Сохранить `telegram_message_id` для связи
-5. Вернуть созданный товар
+1. Получить следующий последовательный ID (`product_sequence_id`)
+2. Найти категорию по `category_name` (если указана)
+3. Загрузить фото из Telegram по `photo_file_id` (если указан)
+4. Создать товар в базе данных с `product_sequence_id`
+5. Сохранить `telegram_message_id` для связи
+6. Обновить сообщение в канале, добавив `#product_id:{sequence_id}`
+7. Отправить уведомление в канал уведомлений (`-1003018207910`) с ссылкой на сообщение
+8. Вернуть созданный товар
+
+**⚠️ ВАЖНО:** См. `BACKEND_NOTIFICATION_IMPLEMENTATION.md` для деталей по уведомлениям и последовательным ID
 
 ---
 
