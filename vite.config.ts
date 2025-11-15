@@ -18,16 +18,35 @@ export default defineConfig({
     // Оптимизация сборки
     rollupOptions: {
       output: {
-        // Разделение vendor и app кода
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'antd-vendor': ['antd'],
-          'query-vendor': ['@tanstack/react-query']
-        }
+        // Разделение vendor и app кода для лучшей загрузки
+        manualChunks: (id) => {
+          // Разделяем node_modules на отдельные чанки
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'react-vendor';
+            }
+            if (id.includes('antd')) {
+              return 'antd-vendor';
+            }
+            if (id.includes('@tanstack/react-query')) {
+              return 'query-vendor';
+            }
+            // Остальные node_modules в отдельный чанк
+            return 'vendor';
+          }
+        },
+        // Оптимизация имен файлов
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     },
     // Увеличиваем лимит предупреждений для больших бандлов
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    // Включаем сжатие
+    reportCompressedSize: true,
+    // Оптимизация для продакшена
+    sourcemap: false
   },
   // Base path для правильной работы на Netlify
   base: "/"
