@@ -3,6 +3,7 @@
 import { addCommas } from "@persian-tools/persian-tools";
 import { Button, Divider } from "antd";
 import { Link } from "react-router-dom";
+import { getImageUrl } from "@utils/image-url";
 
 interface Props {
   url: string;
@@ -35,7 +36,7 @@ function Card({
       <div
         className=" relative ml-auto h-[280px] w-full  bg-[var(--tg-theme-secondary-bg-color)] bg-cover bg-no-repeat "
         style={{
-          backgroundImage: imageURL ? `url('${import.meta.env.VITE_API_URL || ''}/${imageURL}')` : 'none'
+          backgroundImage: imageURL ? `url('${getImageUrl(Array.isArray(imageURL) ? imageURL[0] : imageURL)}')` : 'none'
         }}>
         {finalPrice && (
           <span className="absolute right-0 top-0 rounded-bl-lg bg-red-700 p-2">

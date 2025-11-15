@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Main from "./layouts/main";
 import Router from "./router";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   const [isReady, setIsReady] = useState(false);
@@ -42,7 +43,10 @@ function App() {
         tgApp.ready();
         tgApp.expand();
       } catch (error) {
-        console.warn('Telegram WebApp initialization error:', error);
+        // Ошибка инициализации Telegram не критична
+        if (import.meta.env.DEV) {
+          console.warn('Telegram WebApp initialization error:', error);
+        }
       }
     }
 
@@ -64,11 +68,13 @@ function App() {
   // }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Main>
-        <Router />
-      </Main>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <Main>
+          <Router />
+        </Main>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

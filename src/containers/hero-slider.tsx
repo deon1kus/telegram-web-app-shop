@@ -37,7 +37,9 @@ function HeroSlider() {
               loading="lazy"
               onError={(e) => {
                 // Обработка ошибок загрузки изображений
-                console.warn('Failed to load slider image:', item.photo_Path);
+                if (import.meta.env.DEV) {
+                  console.warn('Failed to load slider image:', item.photo_Path);
+                }
                 (e.target as HTMLImageElement).style.display = 'none';
               }}
             />

@@ -18,7 +18,10 @@ export const getImageUrl = (imagePath: string | null | undefined): string => {
 
   // Если API URL не указан, возвращаем относительный путь
   if (!apiUrl) {
-    console.warn('VITE_API_URL не указан в переменных окружения. Используется относительный путь для изображений.');
+    // В продакшене не логируем предупреждения
+    if (import.meta.env.DEV) {
+      console.warn('VITE_API_URL не указан в переменных окружения. Используется относительный путь для изображений.');
+    }
     return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
   }
 

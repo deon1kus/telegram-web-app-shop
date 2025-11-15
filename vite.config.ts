@@ -14,7 +14,20 @@ export default defineConfig({
     minify: "terser",
     // Убеждаемся, что пути правильные для деплоя
     assetsDir: "assets",
-    outDir: "dist"
+    outDir: "dist",
+    // Оптимизация сборки
+    rollupOptions: {
+      output: {
+        // Разделение vendor и app кода
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'antd-vendor': ['antd'],
+          'query-vendor': ['@tanstack/react-query']
+        }
+      }
+    },
+    // Увеличиваем лимит предупреждений для больших бандлов
+    chunkSizeWarningLimit: 1000
   },
   // Base path для правильной работы на Netlify
   base: "/"
