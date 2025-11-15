@@ -12,8 +12,10 @@ declare global {
   }
 }
 
-// Проверка окружения
-checkEnvironment();
+// Проверка окружения (только в dev режиме)
+if (import.meta.env.DEV) {
+  checkEnvironment();
+}
 
 // Проверка что root элемент существует
 const rootElement = document.getElementById("root");

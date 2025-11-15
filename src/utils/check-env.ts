@@ -2,6 +2,11 @@
  * Проверка окружения и диагностика проблем
  */
 export const checkEnvironment = () => {
+  // В продакшене не логируем проверки для производительности
+  if (import.meta.env.PROD) {
+    return true;
+  }
+
   const issues: string[] = [];
 
   // Проверка что мы в браузере
