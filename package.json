@@ -9,7 +9,10 @@
     "lint:eslint": "eslint . --ext .ts,.tsx",
     "fix:eslint": "eslint --fix  . --ext .ts,.tsx",
     "lint:stylelint": "stylelint **/*.{css,scss,tsx}",
-    "fix:stylelint": "stylelint --fix ./src/**/*.{css,scss,tsx}"
+    "fix:stylelint": "stylelint --fix ./src/**/*.{css,scss,tsx}",
+    "update-bot": "node scripts/update-bot-config.js",
+    "update-bot:ps1": "powershell -ExecutionPolicy Bypass -File scripts/update-bot-config.ps1",
+    "update-bot:sh": "bash scripts/update-bot-config.sh"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
