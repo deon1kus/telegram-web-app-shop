@@ -213,7 +213,10 @@ function Checkout() {
             </Form.Item>
           </Spin>
 
-          <Form.Item name="address" label="Адрес" rules={[{ required: true }]}>
+          <Form.Item 
+            name="address" 
+            label="Адрес" 
+            rules={[{ required: true, message: "Пожалуйста, выберите адрес" }]}>
             <Select
               loading={isFetching || isLoading}
               placeholder="Выберите свой адрес"

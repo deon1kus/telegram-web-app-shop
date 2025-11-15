@@ -91,7 +91,7 @@ function EditAddress() {
             <Form.Item
               label="Область"
               name="state"
-              rules={[{ required: true, message: "" }]}>
+              rules={[{ required: true, message: "Пожалуйста, введите область" }]}>
               <Input />
             </Form.Item>
             <Form.Item
