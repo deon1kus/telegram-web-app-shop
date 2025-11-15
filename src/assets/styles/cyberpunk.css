@@ -81,15 +81,29 @@
   border-color: #b8b8b8 !important;
 }
 
-/* Input поля */
+/* Input поля - LTR направление текста */
 .ant-input,
 .ant-input-affix-wrapper,
-.ant-select-selector {
+.ant-select-selector,
+.ant-input-number,
+.ant-picker,
+.ant-picker-input > input {
   background: #ffffff !important;
   border: 1px solid #d9d9d9 !important;
   color: #000000 !important;
   border-radius: 6px !important;
   transition: all 0.3s ease !important;
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: bidi-override !important;
+}
+
+/* TextArea */
+.ant-input,
+textarea.ant-input {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: bidi-override !important;
 }
 
 .ant-input:focus,

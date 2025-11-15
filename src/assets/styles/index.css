@@ -140,6 +140,27 @@ div {
   background-color: unset !important;
 }
 
+/* Принудительное LTR направление для всех полей ввода */
+input,
+textarea,
+.ant-input,
+.ant-input-number-input,
+.ant-picker-input > input {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: bidi-override !important;
+}
+
+/* Form labels и элементы */
+.ant-form-item-label > label {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.ant-form-item-control-input {
+  direction: ltr !important;
+}
+
 /* Дополнительные стили для мобильных устройств */
 #root {
   width: 100%;

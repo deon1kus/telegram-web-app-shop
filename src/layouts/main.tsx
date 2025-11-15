@@ -2,7 +2,7 @@
 /* eslint-disable indent */
 import { useThemeParams } from "@vkruglikov/react-telegram-web-app";
 import { ConfigProvider, theme } from "antd";
-import fa_IR from "antd/lib/locale/fa_IR";
+import ru_RU from "antd/locale/ru_RU";
 import React from "react";
 
 interface Props {
@@ -30,8 +30,8 @@ function Main({ children }: Props) {
       }}>
       <div className="w-full mx-auto" style={{ maxWidth: '450px', width: '100%' }}>
         <ConfigProvider
-          direction="rtl"
-          locale={fa_IR}
+          direction="ltr"
+          locale={ru_RU}
           renderEmpty={customizeRenderEmpty}
           theme={
             themeParams.text_color
