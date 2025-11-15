@@ -24,7 +24,7 @@
 4. Выберите **"Bot Settings"** → **"Menu Button"**
 5. Укажите URL вашего Web App:
    ```
-   https://deft-capybara-e537d6.netlify.app
+   https://vocal-bombolone-ab82e5.netlify.app
    ```
 
 ### 2. Настройка на бэкенде

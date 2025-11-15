@@ -12,7 +12,7 @@
 2. Отправьте `/mybots`
 3. Выберите **J.A.R.V.I.S.** (@JARVIS_SHEVA_bot)
 4. Выберите **"Bot Settings"** → **"Menu Button"**
-5. Укажите URL: `https://deft-capybara-e537d6.netlify.app`
+5. Укажите URL: `https://vocal-bombolone-ab82e5.netlify.app`
 6. Сохраните изменения
 
 ### 2. Проблема с HTTPS
@@ -46,7 +46,7 @@ Telegram Web App требует HTTPS. Убедитесь, что:
 ## Текущие настройки
 
 - **Bot:** @JARVIS_SHEVA_bot
-- **Web App URL:** https://deft-capybara-e537d6.netlify.app
+- **Web App URL:** https://vocal-bombolone-ab82e5.netlify.app
 - **Server URL:** http://194.87.0.193
 
 ## Проверка

@@ -141,7 +141,7 @@ src/
 ## 🤖 Telegram Bot
 
 - **Bot:** [@JARVIS_SHEVA_bot](https://t.me/JARVIS_SHEVA_bot)
-- **Web App:** https://deft-capybara-e537d6.netlify.app
+- **Web App:** https://vocal-bombolone-ab82e5.netlify.app
 - **Notifications Channel:** [Уведомления магазина](https://t.me/+vZtVvSSVltwzYmMy)
 - **Configuration:** См. [BOT_CONFIG.md](./BOT_CONFIG.md)
 

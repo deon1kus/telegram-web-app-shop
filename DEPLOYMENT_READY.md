@@ -161,6 +161,6 @@ Netlify автоматически:
 - **Bot Token:** `7811866862:AAH4z4mpba_o-fRCdgDv09Ej8nTy-QkzId8`
 - **Notifications Channel:** [Уведомления магазина](https://t.me/+vZtVvSSVltwzYmMy)
 - **Channel Chat ID:** `-1003018207910`
-- **Web App URL:** https://deft-capybara-e537d6.netlify.app
+- **Web App URL:** https://vocal-bombolone-ab82e5.netlify.app
 - **Backend:** http://194.87.0.193
 

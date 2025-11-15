@@ -9,8 +9,8 @@
 **Файл:** `/root/telegram-bot/.env`
 
 **Изменение:**
-- ❌ Старый URL: `https://webappshop1.netlify.app`
-- ✅ Новый URL: `https://deft-capybara-e537d6.netlify.app`
+- ❌ Старый URL: `https://deft-capybara-e537d6.netlify.app`
+- ✅ Новый URL: `https://vocal-bombolone-ab82e5.netlify.app`
 
 ### 2. Перезапущен бот
 
@@ -30,7 +30,7 @@
 ## Текущие настройки
 
 ### Web App
-- **URL:** https://deft-capybara-e537d6.netlify.app
+- **URL:** https://vocal-bombolone-ab82e5.netlify.app
 - **Статус:** ✅ Активен и обновлен
 
 ### Telegram Bot
@@ -56,7 +56,7 @@
 2. Отправьте `/mybots`
 3. Выберите **J.A.R.V.I.S.** (@JARVIS_SHEVA_bot)
 4. Выберите **"Bot Settings"** → **"Menu Button"**
-5. Укажите новый URL: `https://deft-capybara-e537d6.netlify.app`
+5. Укажите новый URL: `https://vocal-bombolone-ab82e5.netlify.app`
 
 ## ✅ Итог
 

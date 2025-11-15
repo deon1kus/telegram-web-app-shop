@@ -34,7 +34,7 @@
 3. Выберите бота **J.A.R.V.I.S.** (@JARVIS_SHEVA_bot)
 4. Нажмите **"Bot Settings"**
 5. Выберите **"Menu Button"**
-6. Введите URL: `https://deft-capybara-e537d6.netlify.app`
+6. Введите URL: `https://vocal-bombolone-ab82e5.netlify.app`
 7. Нажмите **"Done"**
 
 ### Шаг 2: Проверить работу
@@ -66,7 +66,7 @@
 ## 📋 Текущие настройки
 
 - **Bot:** @JARVIS_SHEVA_bot
-- **Web App URL:** https://deft-capybara-e537d6.netlify.app
+- **Web App URL:** https://vocal-bombolone-ab82e5.netlify.app
 - **Server:** http://194.87.0.193
 - **Channel:** https://t.me/+vZtVvSSVltwzYmMy
 

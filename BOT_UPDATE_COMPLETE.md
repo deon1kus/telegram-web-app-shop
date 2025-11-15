@@ -12,7 +12,7 @@
 - ✅ `TELEGRAM_BOT_TOKEN=7811866862:AAH4z4mpba_o-fRCdgDv09Ej8nTy-QkzId8`
 - ✅ `ADMIN_CHAT_ID=-1003018207910` (канал для уведомлений)
 - ✅ `ADMIN_ID=291867873`
-- ✅ `SHOP_URL=https://deft-capybara-e537d6.netlify.app` (обновлен URL магазина)
+- ✅ `SHOP_URL=https://vocal-bombolone-ab82e5.netlify.app` (обновлен URL магазина)
 - ✅ `API_URL=http://localhost:3001`
 
 ### 2. Перезапущен бот
@@ -37,7 +37,7 @@
 - **Статус:** ✅ Настроен
 
 ### Web App
-- **URL:** https://deft-capybara-e537d6.netlify.app
+- **URL:** https://vocal-bombolone-ab82e5.netlify.app
 - **Статус:** ✅ Обновлен в конфигурации
 
 ## Проверка работы
