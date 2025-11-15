@@ -36,7 +36,9 @@ dist-ssr
 *.py
 *.ps1
 !cleanup_project.ps1
+!scripts/update-bot-config.ps1
 *.sh
+!scripts/update-bot-config.sh
 *.zip
 src_backup_*/
 files_to_translate/
