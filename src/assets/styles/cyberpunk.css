@@ -48,6 +48,32 @@
   border-color: rgba(255, 77, 79, 0.4) !important;
 }
 
+.ant-btn-link {
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+}
+
+.ant-btn-ghost,
+.ant-btn-primary.ant-btn-ghost,
+.ant-btn-default.ant-btn-ghost,
+.ant-btn-danger.ant-btn-ghost {
+  background: rgba(128, 128, 128, 0.2) !important;
+  border: 1px solid rgba(128, 128, 128, 0.3) !important;
+  color: #000000 !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.ant-btn-ghost:hover,
+.ant-btn-ghost:focus,
+.ant-btn-primary.ant-btn-ghost:hover,
+.ant-btn-primary.ant-btn-ghost:focus,
+.ant-btn-default.ant-btn-ghost:hover,
+.ant-btn-default.ant-btn-ghost:focus {
+  background: rgba(128, 128, 128, 0.3) !important;
+  border-color: rgba(128, 128, 128, 0.4) !important;
+}
+
 /* Input поля */
 .ant-input,
 .ant-input-affix-wrapper,
