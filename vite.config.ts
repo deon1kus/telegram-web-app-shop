@@ -22,14 +22,21 @@ export default defineConfig({
         manualChunks: (id) => {
           // Разделяем node_modules на отдельные чанки
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+            // React и React DOM должны быть вместе и загружаться первыми
+            if (id.includes('react') || id.includes('react-dom')) {
               return 'react-vendor';
             }
-            if (id.includes('antd')) {
-              return 'antd-vendor';
+            // React Router отдельно, но после React
+            if (id.includes('react-router')) {
+              return 'react-router-vendor';
             }
+            // React Query отдельно
             if (id.includes('@tanstack/react-query')) {
               return 'query-vendor';
+            }
+            // Ant Design отдельно
+            if (id.includes('antd')) {
+              return 'antd-vendor';
             }
             // Остальные node_modules в отдельный чанк
             return 'vendor';
@@ -46,7 +53,12 @@ export default defineConfig({
     // Включаем сжатие
     reportCompressedSize: true,
     // Оптимизация для продакшена
-    sourcemap: false
+    sourcemap: false,
+    // Убеждаемся что commonjs правильно обрабатывается
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true
+    }
   },
   // Base path для правильной работы на Netlify
   base: "/"
