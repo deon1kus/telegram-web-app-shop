@@ -22,25 +22,59 @@
     
     <!-- Критический CSS для предотвращения FOUC (Flash of Unstyled Content) -->
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
         padding: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+        color: #00ff88;
+        min-height: 100vh;
+        overflow-x: hidden;
       }
       #root {
         min-height: 100vh;
         width: 100%;
+        position: relative;
+      }
+      /* Скрываем загрузочный экран после загрузки */
+      #root > div:first-child {
+        transition: opacity 0.3s ease;
       }
     </style>
   </head>
   <body>
     <div id="root">
-      <div style="padding: 20px; text-align: center; font-family: system-ui, -apple-system, sans-serif;">
-        <div>Загрузка приложения...</div>
-        <div style="font-size: 12px; color: #999; margin-top: 10px;">
-          Если страница не загружается, проверьте консоль браузера (F12)
+      <div style="
+        padding: 20px; 
+        text-align: center; 
+        font-family: Inter, Roboto, system-ui, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+        color: #00ff88;
+      ">
+        <div style="
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        ">Загрузка приложения...</div>
+        <div style="
+          font-size: 12px; 
+          color: #8b8b9e; 
+          margin-top: 10px;
+        ">
+          Если загрузка не завершается, проверьте консоль браузера
         </div>
       </div>
     </div>

@@ -34,23 +34,42 @@ function App() {
 
   useEffect(() => {
     // Быстрая инициализация - не ждем Telegram
-    const initTimer = setTimeout(() => {
-      setIsReady(true);
-    }, 100);
-
-    if (tgApp) {
-      try {
-        tgApp.ready();
-        tgApp.expand();
-      } catch (error) {
-        // Ошибка инициализации Telegram не критична
-        if (import.meta.env.DEV) {
+    let initTimer: NodeJS.Timeout;
+    
+    try {
+      // Пытаемся инициализировать Telegram WebApp
+      if (tgApp) {
+        try {
+          tgApp.ready();
+          tgApp.expand();
+          // Устанавливаем цветовую схему для киберпанк темы
+          if (tgApp.setHeaderColor) {
+            tgApp.setHeaderColor('#0a0a0f');
+          }
+          if (tgApp.setBackgroundColor) {
+            tgApp.setBackgroundColor('#0a0a0f');
+          }
+        } catch (error) {
+          // Ошибка инициализации Telegram не критична
           console.warn('Telegram WebApp initialization error:', error);
         }
       }
+      
+      // Устанавливаем таймер для показа приложения
+      initTimer = setTimeout(() => {
+        setIsReady(true);
+      }, 150);
+    } catch (error) {
+      // Критическая ошибка - показываем приложение все равно
+      console.error('App initialization error:', error);
+      setIsReady(true);
     }
 
-    return () => clearTimeout(initTimer);
+    return () => {
+      if (initTimer) {
+        clearTimeout(initTimer);
+      }
+    };
   }, [tgApp]);
 
   if (!isReady) {
@@ -61,12 +80,26 @@ function App() {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        background: "linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%)",
+        color: "#00ff88",
+        fontFamily: "Inter, Roboto, system-ui, sans-serif"
       }}>
         <div>
-          <div style={{ marginBottom: "10px" }}>Загрузка...</div>
-          <div style={{ fontSize: "12px", color: "#999" }}>
-            Если загрузка не завершается, проверьте консоль браузера (F12)
+          <div style={{ 
+            marginBottom: "10px",
+            fontSize: "18px",
+            fontWeight: "600",
+            textShadow: "0 0 10px rgba(0, 255, 136, 0.5)"
+          }}>
+            Загрузка...
+          </div>
+          <div style={{ 
+            fontSize: "12px", 
+            color: "#8b8b9e",
+            marginTop: "10px"
+          }}>
+            Если загрузка не завершается, проверьте консоль браузера
           </div>
         </div>
       </div>
