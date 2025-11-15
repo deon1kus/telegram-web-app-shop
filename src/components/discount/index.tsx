@@ -73,8 +73,8 @@ function Discount({ type, id, data }: Props) {
             product_id: type === "product" ? parseInt(id, 10) : null,
             discount_type: "percent",
             discount_value: percent,
-            discount_start_date: dayjs(discount_start_date.$d).format() || "",
-            discount_end_date: dayjs(discount_end_date.$d).format() || "",
+            discount_start_date: discount_start_date ? discount_start_date.format() : "",
+            discount_end_date: discount_end_date ? discount_end_date.format() : "",
             user_id: userId.toString()
           };
           if (data) {
