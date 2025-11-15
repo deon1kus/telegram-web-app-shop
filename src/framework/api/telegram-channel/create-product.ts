@@ -40,6 +40,10 @@ const useCreateProductFromTelegram = () =>
       };
 
       // Отправляем на специальный endpoint для товаров из Telegram
+      // Backend автоматически:
+      // 1. Присвоит последовательный ID
+      // 2. Обновит сообщение в канале с ID
+      // 3. Отправит уведомление в канал уведомлений
       const response = await Api.post("/products/from-telegram", {
         ...productData,
         telegram_message_id: data.messageId,

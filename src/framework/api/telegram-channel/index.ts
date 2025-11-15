@@ -5,4 +5,5 @@
 export { default as useCreateProductFromTelegram } from "./create-product";
 export { default as useUpdateProductFromTelegram } from "./update-product";
 export { default as useDeleteProductFromTelegram } from "./delete-product";
+export { default as useSendTelegramNotification } from "./send-notification";
 
