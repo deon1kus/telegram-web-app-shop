@@ -1,3 +1,19 @@
+/**
+ * Точка входа приложения Telegram Web App Shop v0.0.2
+ * 
+ * ВАЖНО: Этот файл критичен для правильной загрузки приложения!
+ * 
+ * Основные функции:
+ * 1. Инициализация React приложения
+ * 2. Проверка окружения (только в dev режиме)
+ * 3. Обработка ошибок при рендеринге
+ * 4. Отладка загрузки ресурсов
+ * 
+ * История исправлений:
+ * - v0.0.1: Первоначальная версия
+ * - v0.0.2: Добавлена обработка ошибок, улучшена отладка
+ */
+
 import "@style/index.css";
 
 import { createRoot } from "react-dom/client";
@@ -7,6 +23,7 @@ import { TelegramType } from "./types";
 import { checkEnvironment } from "./utils/check-env";
 import { checkAppLoad, checkResources, debugLog } from "./utils/debug";
 
+// Расширение глобального объекта Window для поддержки Telegram Web App API
 declare global {
   interface Window {
     Telegram: TelegramType;

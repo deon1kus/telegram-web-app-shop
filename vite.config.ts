@@ -1,4 +1,20 @@
-/** @type {import('vite').UserConfig} */
+/**
+ * Vite Configuration для Telegram Web App Shop v0.0.2
+ * 
+ * ВАЖНО: Эта конфигурация критична для правильной работы приложения!
+ * 
+ * Основные моменты:
+ * 1. Chunk splitting настроен так, чтобы React загружался первым
+ * 2. Все React-зависимости остаются в основном бандле (index.js)
+ * 3. Только чистые библиотеки (axios, dayjs и т.д.) идут в vendor
+ * 4. Это предотвращает ошибку "Cannot read properties of undefined (reading 'useState')"
+ * 
+ * История исправлений:
+ * - v0.0.1: Первоначальная конфигурация
+ * - v0.0.2: Упрощен chunk splitting для предотвращения ошибок загрузки React
+ * 
+ * @type {import('vite').UserConfig}
+ */
 
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";

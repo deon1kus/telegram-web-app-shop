@@ -1,6 +1,6 @@
 {
-  "name": "starter-template",
-  "version": "0.0.1",
+  "name": "telegram-web-app-shop",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
