@@ -39,9 +39,25 @@ export default defineConfig({
             if (id.includes('antd')) {
               return 'antd-vendor';
             }
-            // Остальные node_modules в отдельный чанк
-            // НО исключаем все что связано с React
-            return 'vendor';
+            // ВАЖНО: Исключаем из vendor все что может использовать React
+            // Оставляем только чистые библиотеки без React зависимостей
+            // Это предотвращает ошибку "Cannot read properties of undefined (reading 'useState')"
+            const reactDependentLibs = [
+              'react',
+              '@vkruglikov',
+              'react-telegram',
+              'react-images',
+              'formik',
+              'jotai'
+            ];
+            
+            const isReactDependent = reactDependentLibs.some(lib => id.includes(lib));
+            
+            if (!isReactDependent) {
+              return 'vendor';
+            }
+            // Все остальное (с React зависимостями) идет в основной бандл
+            // чтобы гарантировать правильный порядок загрузки
           }
         },
         // Оптимизация имен файлов
