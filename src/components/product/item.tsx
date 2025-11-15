@@ -50,9 +50,10 @@ function ProductItem({
       style={{ minHeight: '280px' }}>
       {/* Картинка сверху */}
       <div
-        className="relative w-full h-40 bg-gray-100 bg-cover bg-center"
+        className="relative w-full bg-gray-100 bg-cover bg-center"
         style={{
           backgroundImage: imageURL ? `url('${import.meta.env.VITE_API_URL || ''}/${imageURL}')` : 'none',
+          aspectRatio: '1 / 1',
           minHeight: '160px'
         }}>
         {finalPrice && (
