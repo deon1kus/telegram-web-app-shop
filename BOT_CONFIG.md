@@ -24,9 +24,8 @@
 4. Выберите **"Bot Settings"** → **"Menu Button"**
 5. Укажите URL вашего Web App:
    ```
-   https://ваш-сайт.netlify.app
+   https://deft-capybara-e537d6.netlify.app
    ```
-   Например: `https://webappshop1.netlify.app`
 
 ### 2. Настройка на бэкенде
 
