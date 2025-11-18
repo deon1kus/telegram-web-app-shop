@@ -11,7 +11,7 @@
 Откройте в браузере или Telegram Web App:
 
 ```
-https://vocal-bombolone-ab82e5.netlify.app/admin
+https://celadon-starburst-162af0.netlify.app/admin
 ```
 
 ### Способ 2: Через навигацию
@@ -61,7 +61,7 @@ https://vocal-bombolone-ab82e5.netlify.app/admin
 
 ### Шаг 1: Откройте список товаров
 ```
-https://vocal-bombolone-ab82e5.netlify.app/admin/products
+https://celadon-starburst-162af0.netlify.app/admin/products
 ```
 
 ### Шаг 2: Найдите нужный товар
@@ -91,7 +91,7 @@ https://vocal-bombolone-ab82e5.netlify.app/admin/products
 
 ### Шаг 1: Откройте страницу добавления
 ```
-https://vocal-bombolone-ab82e5.netlify.app/admin/products/add
+https://celadon-starburst-162af0.netlify.app/admin/products/add
 ```
 
 Или:
@@ -152,24 +152,24 @@ https://vocal-bombolone-ab82e5.netlify.app/admin/products/add
 
 ## 🚀 Быстрые ссылки
 
-- **Главная админки:** https://vocal-bombolone-ab82e5.netlify.app/admin
-- **Список товаров:** https://vocal-bombolone-ab82e5.netlify.app/admin/products
-- **Добавить товар:** https://vocal-bombolone-ab82e5.netlify.app/admin/products/add
+- **Главная админки:** https://celadon-starburst-162af0.netlify.app/admin
+- **Список товаров:** https://celadon-starburst-162af0.netlify.app/admin/products
+- **Добавить товар:** https://celadon-starburst-162af0.netlify.app/admin/products/add
 
 ## 📝 Примеры использования
 
 ### Редактирование товара с ID 123:
 ```
-https://vocal-bombolone-ab82e5.netlify.app/admin/products/123
+https://celadon-starburst-162af0.netlify.app/admin/products/123
 ```
 
 ### Добавление категории:
 ```
-https://vocal-bombolone-ab82e5.netlify.app/admin/categories/0
+https://celadon-starburst-162af0.netlify.app/admin/categories/0
 ```
 
 ### Просмотр заказов:
 ```
-https://vocal-bombolone-ab82e5.netlify.app/admin/orders
+https://celadon-starburst-162af0.netlify.app/admin/orders
 ```
 

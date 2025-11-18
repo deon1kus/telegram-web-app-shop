@@ -24,7 +24,7 @@
 4. Выберите **"Bot Settings"** → **"Menu Button"**
 5. Укажите URL вашего Web App:
    ```
-   https://vocal-bombolone-ab82e5.netlify.app
+   https://celadon-starburst-162af0.netlify.app
    ```
 
 ### 2. Настройка на бэкенде
