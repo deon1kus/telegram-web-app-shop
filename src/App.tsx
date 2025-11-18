@@ -1,19 +1,3 @@
-/**
- * Главный компонент приложения Telegram Web App Shop v0.0.2
- * 
- * ВАЖНО: Инициализация Telegram WebApp критична для работы приложения!
- * 
- * Основные функции:
- * 1. Инициализация Telegram WebApp (ready, expand, цвета)
- * 2. Настройка React Query для кеширования запросов
- * 3. Обработка ошибок через ErrorBoundary
- * 4. Показ загрузочного экрана до готовности
- * 
- * История исправлений:
- * - v0.0.1: Первоначальная версия
- * - v0.0.2: Улучшена инициализация Telegram, добавлены цвета для светлой темы
- */
-
 /* eslint-disable indent */
 import "@style/app.scss";
 import "antd/dist/reset.css";
@@ -49,43 +33,35 @@ function App() {
   });
 
   useEffect(() => {
-    // Быстрая инициализация - не ждем Telegram
-    let initTimer: NodeJS.Timeout;
-    
-    try {
-      // Пытаемся инициализировать Telegram WebApp
-      if (tgApp) {
-        try {
-          tgApp.ready();
-          tgApp.expand();
-          // Устанавливаем цветовую схему для светлой темы
-          if (tgApp.setHeaderColor) {
-            tgApp.setHeaderColor('#ffffff');
-          }
-          if (tgApp.setBackgroundColor) {
-            tgApp.setBackgroundColor('#ffffff');
-          }
-        } catch (error) {
-          // Ошибка инициализации Telegram не критична
-          console.warn('Telegram WebApp initialization error:', error);
-        }
+    // Проверяем наличие Telegram WebApp
+    const checkTelegram = () => {
+      if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+        return window.Telegram.WebApp;
       }
-      
-      // Устанавливаем таймер для показа приложения
-      initTimer = setTimeout(() => {
-        setIsReady(true);
-      }, 150);
-    } catch (error) {
-      // Критическая ошибка - показываем приложение все равно
-      console.error('App initialization error:', error);
+      return null;
+    };
+
+    // Быстрая инициализация - не ждем Telegram
+    const initTimer = setTimeout(() => {
+      console.log('[App] Setting isReady to true');
       setIsReady(true);
+    }, 100);
+
+    const webApp = checkTelegram();
+    if (webApp) {
+      try {
+        console.log('[App] Initializing Telegram WebApp');
+        webApp.ready();
+        webApp.expand();
+        console.log('[App] Telegram WebApp initialized');
+      } catch (error) {
+        console.error('[App] Telegram WebApp initialization error:', error);
+      }
+    } else {
+      console.warn('[App] Telegram WebApp not found, running in browser mode');
     }
 
-    return () => {
-      if (initTimer) {
-        clearTimeout(initTimer);
-      }
-    };
+    return () => clearTimeout(initTimer);
   }, [tgApp]);
 
   if (!isReady) {
@@ -96,26 +72,12 @@ function App() {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        background: "#ffffff",
-        color: "#000000",
-        fontFamily: "Inter, Roboto, system-ui, sans-serif"
+        justifyContent: "center"
       }}>
         <div>
-          <div style={{ 
-            marginBottom: "10px",
-            fontSize: "18px",
-            fontWeight: "600",
-            color: "#000000"
-          }}>
-            Загрузка...
-          </div>
-          <div style={{ 
-            fontSize: "12px", 
-            color: "#666666",
-            marginTop: "10px"
-          }}>
-            Если загрузка не завершается, проверьте консоль браузера
+          <div style={{ marginBottom: "10px" }}>Загрузка...</div>
+          <div style={{ fontSize: "12px", color: "#999" }}>
+            Если загрузка не завершается, проверьте консоль браузера (F12)
           </div>
         </div>
       </div>
