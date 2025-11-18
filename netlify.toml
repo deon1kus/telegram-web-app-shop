@@ -20,34 +20,10 @@
   status = 200
   force = true
 
-# Исключаем статические файлы из SPA redirect
-# Эти файлы должны загружаться напрямую, без редиректа
-[[redirects]]
-  from = "/assets/*"
-  to = "/assets/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/*.js"
-  to = "/:splat.js"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/*.css"
-  to = "/:splat.css"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/*.json"
-  to = "/:splat.json"
-  status = 200
-  force = true
-
 # Настройки для SPA (Single Page Application)
 # ВАЖНО: Должно быть ПОСЛЕДНИМ, иначе перехватит все запросы
+# Netlify автоматически обслуживает статические файлы из dist/
+# SPA redirect применяется только если файл не найден
 [[redirects]]
   from = "/*"
   to = "/index.html"
