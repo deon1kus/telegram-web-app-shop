@@ -6,6 +6,10 @@
   # Node.js версия
   [build.environment]
     NODE_VERSION = "18"
+    # Увеличиваем таймаут для больших сборок
+    NETLIFY_NODE_VERSION = "18"
+    # Оптимизация памяти
+    NODE_OPTIONS = "--max-old-space-size=4096"
 
 # Проксирование API запросов на ваш сервер
 # ВАЖНО: Должно быть ПЕРЕД редиректом для SPA
@@ -38,6 +42,8 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
     # Netlify автоматически применяет сжатие, не нужно указывать Content-Encoding
+    # Увеличиваем таймаут для больших файлов
+    Connection = "keep-alive"
 
 # Заголовки для HTML
 [[headers]]

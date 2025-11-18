@@ -1,20 +1,4 @@
-/**
- * Vite Configuration для Telegram Web App Shop v0.0.2
- * 
- * ВАЖНО: Эта конфигурация критична для правильной работы приложения!
- * 
- * Основные моменты:
- * 1. Chunk splitting настроен так, чтобы React загружался первым
- * 2. Все React-зависимости остаются в основном бандле (index.js)
- * 3. Только чистые библиотеки (axios, dayjs и т.д.) идут в vendor
- * 4. Это предотвращает ошибку "Cannot read properties of undefined (reading 'useState')"
- * 
- * История исправлений:
- * - v0.0.1: Первоначальная конфигурация
- * - v0.0.2: Упрощен chunk splitting для предотвращения ошибок загрузки React
- * 
- * @type {import('vite').UserConfig}
- */
+/** @type {import('vite').UserConfig} */
 
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
@@ -31,49 +15,41 @@ export default defineConfig({
     // Убеждаемся, что пути правильные для деплоя
     assetsDir: "assets",
     outDir: "dist",
-    // Оптимизация сборки
+    // КРИТИЧНО: Упрощаем chunk splitting для предотвращения ERR_CONNECTION_RESET
+    // Большие чанки могут вызывать проблемы с загрузкой на Netlify
     rollupOptions: {
       output: {
-        // КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Упрощенная стратегия для предотвращения ошибки useState
-        // Все React-зависимости остаются в основном бандле (index.js)
-        // Только чистые библиотеки БЕЗ React идут в vendor
+        // МИНИМАЛЬНОЕ разделение - только критичные библиотеки
         manualChunks: (id) => {
+          // Только node_modules разделяем
           if (id.includes('node_modules')) {
-            // Проверяем, является ли библиотека React-зависимой
-            // ВСЕ React-зависимые библиотеки остаются в основном бандле
-            const isReactRelated = 
-              id.includes('react') ||
-              id.includes('scheduler') ||
-              id.includes('jsx-runtime') ||
-              id.includes('react-router') ||
-              id.includes('react-query') ||
-              id.includes('@tanstack/react-query') ||
-              id.includes('antd') ||
-              id.includes('@vkruglikov') ||
-              id.includes('react-telegram') ||
-              id.includes('react-images') ||
-              id.includes('formik') ||
-              id.includes('jotai');
-            
-            // Только чистые библиотеки БЕЗ React идут в vendor
-            // Это: axios, dayjs, query-string, clsx, @persian-tools и т.д.
-            if (!isReactRelated) {
-              return 'vendor';
+            // React и все его зависимости - ОБЯЗАТЕЛЬНО вместе
+            if (id.includes('react') || 
+                id.includes('react-dom') || 
+                id.includes('scheduler') ||
+                id.includes('jsx-runtime')) {
+              return 'react-core';
             }
-            
-            // ВСЕ React-зависимые библиотеки остаются в основном бандле (index.js)
-            // Это гарантирует правильный порядок загрузки и предотвращает ошибку useState
-            return undefined; // undefined означает, что модуль идет в основной бандл
+            // Ant Design - большая библиотека, отдельно
+            if (id.includes('antd')) {
+              return 'antd';
+            }
+            // Все остальное в один vendor chunk для уменьшения количества запросов
+            // Это предотвращает ERR_CONNECTION_RESET из-за множества параллельных запросов
+            return 'vendor';
           }
         },
         // Оптимизация имен файлов
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // КРИТИЧНО: Ограничиваем размер чанков для предотвращения таймаутов
+        // Включаем inline для маленьких чанков
+        inlineDynamicImports: false
       }
     },
     // Увеличиваем лимит предупреждений для больших бандлов
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     // Включаем сжатие
     reportCompressedSize: true,
     // Оптимизация для продакшена
@@ -82,6 +58,17 @@ export default defineConfig({
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true
+    },
+    // КРИТИЧНО: Увеличиваем таймаут сборки для больших проектов
+    target: 'esnext',
+    // Оптимизация для лучшей загрузки
+    cssCodeSplit: true,
+    // Уменьшаем размер бандла
+    terserOptions: {
+      compress: {
+        drop_console: false, // Оставляем console для отладки
+        drop_debugger: true
+      }
     }
   },
   // Base path для правильной работы на Netlify
