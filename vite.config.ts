@@ -15,6 +15,10 @@ export default defineConfig({
     // Убеждаемся, что пути правильные для деплоя
     assetsDir: "assets",
     outDir: "dist",
+    // КРИТИЧНО: Включаем правильную обработку HTML
+    emptyOutDir: true,
+    // Убеждаемся что все пути абсолютные
+    assetsInlineLimit: 4096,
     // КРИТИЧНО: Упрощаем chunk splitting для предотвращения ERR_CONNECTION_RESET
     // Большие чанки могут вызывать проблемы с загрузкой на Netlify
     rollupOptions: {
