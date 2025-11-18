@@ -13,6 +13,7 @@ import {
   BotMasters,
   BotPanel,
   BotSetting,
+  ChannelManagement,
   Categories,
   CategoriesAdd,
   CategoriesEdit,
@@ -134,6 +135,10 @@ export const routes = createBrowserRouter([
       {
         path: "masters/:master_id",
         element: <BotEditMasters />
+      },
+      {
+        path: "channel",
+        element: <ChannelManagement />
       }
     ]
   },

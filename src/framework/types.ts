@@ -237,6 +237,78 @@ export interface TypeBotSetting {
   special: boolean;
 }
 
+// Telegram Channel Integration Types
+export interface TelegramChannelPost {
+  message_id: number;
+  channel_id: string;
+  channel_username: string;
+  date: number;
+  text?: string;
+  caption?: string;
+  photos?: TelegramPhoto[];
+  entities?: TelegramMessageEntity[];
+  raw_data: unknown; // Полные данные от Telegram API
+}
+
+export interface TelegramPhoto {
+  file_id: string;
+  file_unique_id: string;
+  width: number;
+  height: number;
+  file_size?: number;
+}
+
+export interface TelegramMessageEntity {
+  type: string;
+  offset: number;
+  length: number;
+  url?: string;
+  user?: unknown;
+}
+
+export interface ParsedProductFromChannel {
+  product_name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  photos: string[]; // URLs или base64
+  contact_info?: {
+    phone?: string;
+    username?: string;
+    email?: string;
+  };
+  category_ids?: number[];
+  channel_message_id: number;
+  channel_id: string;
+  parsed_at: string;
+  raw_text: string;
+}
+
+export interface ChannelSyncSettings {
+  channel_id: string;
+  channel_username: string;
+  auto_sync: boolean;
+  sync_interval_minutes: number;
+  last_sync_message_id?: number;
+  parse_rules: {
+    price_patterns: string[];
+    contact_patterns: string[];
+    category_keywords: Record<string, number[]>; // keyword -> category_ids
+  };
+}
+
+export interface ChannelSyncResult {
+  success: boolean;
+  message: string;
+  synced_count: number;
+  failed_count: number;
+  products: ParsedProductFromChannel[];
+  errors: Array<{
+    message_id: number;
+    error: string;
+  }>;
+}
+
 export interface TypePostMaster {
   user_Id: string;
   name: string;

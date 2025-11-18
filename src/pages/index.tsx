@@ -18,6 +18,7 @@ export { default as BotAddMasters } from "./bot/masters/add";
 export { default as BotEditMasters } from "./bot/masters/edit";
 export { default as BotMasters } from "./bot/masters/list";
 export { default as BotSetting } from "./bot/setting";
+export { default as ChannelManagement } from "./bot/channel";
 export { default as HomePage } from "./home";
 // User pages
 export { default as UserCart } from "./user/cart/index";
