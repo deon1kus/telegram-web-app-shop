@@ -8,7 +8,8 @@ import { useNavigate } from "react-router";
 
 function EditProfile() {
   const [form] = Form.useForm();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isFetching, isLoading } = useGetUserInfo({ user_Id: id });
   const mutation = useUpdateUser({ user_id: id });
   const navigate = useNavigate();

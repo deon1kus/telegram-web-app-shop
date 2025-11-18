@@ -14,7 +14,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 function Cart() {
   const clearCartMutation = useClearCart();
   const delCartItemMutation = useDeleteCartItem();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isFetching, isLoading, refetch } = useGetCarts(id);
   const [openClearModal, setOpenClearModal] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
@@ -72,7 +73,7 @@ function Cart() {
   return (
     <Container title="Корзина покупок" backwardUrl="/">
       <div className="flex flex-col gap-5">
-        <div className=" rounded-lg bg-[var(--tg-theme-secondary-bg-color)] p-3 transition-all ">
+        <div className="rounded-lg p-3 transition-all" style={{ backgroundColor: '#e5e5e5' }}>
           <List
             loading={isLoading || isFetching}
             itemLayout="horizontal"

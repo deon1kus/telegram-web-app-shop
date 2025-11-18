@@ -12,10 +12,9 @@ import {
   message,
   Popconfirm
 } from "antd";
-import { DatePicker, useJalaliLocaleListener } from "antd-jalali";
+import { DatePicker } from "antd";
 import type { RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
-import moment from "jalali-moment";
 import { useState } from "react";
 
 interface Props {
@@ -25,7 +24,8 @@ interface Props {
 }
 
 function Discount({ type, id, data }: Props) {
-  const { id: userId } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const userId = telegramUser?.id;
   const mutation = useAddDiscounts();
   const updateMutation = useUpdateDiscount({
     discount_id: data?.discount_Id || ""
@@ -35,8 +35,6 @@ function Discount({ type, id, data }: Props) {
   const disabledDate: RangePickerProps["disabledDate"] = (current) =>
     // Can not select days before today and today
     current && current < dayjs().endOf("day");
-  useJalaliLocaleListener();
-  // dayjs.calendar("jalali");
 
   const handleDeleteDiscount = () => {
     deleteMutation.mutate(
@@ -75,8 +73,8 @@ function Discount({ type, id, data }: Props) {
             product_id: type === "product" ? parseInt(id, 10) : null,
             discount_type: "percent",
             discount_value: percent,
-            discount_start_date: moment(discount_start_date.$d).format() || "",
-            discount_end_date: moment(discount_end_date.$d).format() || "",
+            discount_start_date: discount_start_date ? discount_start_date.format() : "",
+            discount_end_date: discount_end_date ? discount_end_date.format() : "",
             user_id: userId.toString()
           };
           if (data) {

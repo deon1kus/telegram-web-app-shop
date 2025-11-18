@@ -23,7 +23,8 @@ function CategoriesEdit() {
   const location = useLocation();
   const [form] = Form.useForm();
   const mutation = useUpdateCategory({ category_id: cat_id });
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isLoading, isFetching } = useGetCategories({});
   const {
     data: cat_data,

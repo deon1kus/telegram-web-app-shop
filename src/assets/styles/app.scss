@@ -9,8 +9,13 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
-  color: white;
+  /* Черный текст */
+  color: #000000;
   text-align: center;
+  
+  /* Белый фон */
+  background: #ffffff;
+  background-attachment: fixed;
   
   /* Предотвращаем горизонтальный скролл */
   position: relative;

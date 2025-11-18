@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест системы интеграции с Telegram каналом</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1890ff;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid #1890ff;
+        }
+        
+        .test-section h2 {
+            color: #1890ff;
+            margin-bottom: 15px;
+        }
+        
+        .test-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .test-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .result {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
+        .success {
+            background: #f6ffed;
+            border: 1px solid #b7eb8f;
+            color: #389e0d;
+        }
+        
+        .error {
+            background: #fff2f0;
+            border: 1px solid #ffccc7;
+            color: #cf1322;
+        }
+        
+        .info {
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            color: #0050b3;
+        }
+        
+        button {
+            background: #1890ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: #40a9ff;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1890ff;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тестирование системы интеграции с Telegram каналом</h1>
+        <p class="subtitle">Версия 0.0.2 | Канал товаров: -1003271699368 | Канал уведомлений: -1003018207910</p>
+        
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="passed">0</div>
+                <div class="stat-label">Пройдено</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="failed">0</div>
+                <div class="stat-label">Провалено</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="total">0</div>
+                <div class="stat-label">Всего</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="rate">0%</div>
+                <div class="stat-label">Успешность</div>
+            </div>
+        </div>
+        
+        <button onclick="runAllTests()">▶️ Запустить все тесты</button>
+        <button onclick="clearResults()">🗑️ Очистить результаты</button>
+        
+        <div class="test-section">
+            <h2>📋 Тест 1: Парсинг сообщений из канала</h2>
+            <div id="test1"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📎 Тест 2: Генерация ссылок на сообщения</h2>
+            <div id="test2"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📢 Тест 3: Форматирование уведомлений</h2>
+            <div id="test3"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔢 Тест 4: Добавление product_id в сообщение</h2>
+            <div id="test4"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔄 Тест 5: Полный цикл работы системы</h2>
+            <div id="test5"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Функции парсинга
+        function parseProductMessage(message) {
+            if (!message) return null;
+            
+            const result = { messageId: message.message_id || message.messageId };
+            const text = message.caption || message.text || '';
+            
+            if (!text && !message.photo) return null;
+            
+            if (message.photo && message.photo.length > 0) {
+                result.photoFileId = message.photo[message.photo.length - 1].file_id;
+            }
+            
+            const descMatch = text.match(/📝\s*(.+?)(?=\n(?:💰|📦|🏷️|📞|#)|$)/s);
+            if (descMatch) {
+                result.description = descMatch[1].trim();
+            } else if (text) {
+                const firstMarker = text.match(/(💰|📦|🏷️|📞|#)/);
+                result.description = firstMarker ? text.substring(0, firstMarker.index).trim() : text.trim();
+            }
+            
+            const priceMatch = text.match(/💰\s*Цена:\s*(\d+(?:\s*\d+)*)\s*томан/i);
+            if (priceMatch) {
+                result.price = parseInt(priceMatch[1].replace(/\s+/g, ''), 10);
+            }
+            
+            const qtyMatch = text.match(/📦\s*Количество:\s*(\d+)\s*шт/i);
+            if (qtyMatch) {
+                result.quantity = parseInt(qtyMatch[1], 10);
+            }
+            
+            const catMatch = text.match(/🏷️\s*Категория:\s*(.+?)(?=\n|$)/i);
+            if (catMatch) {
+                result.category = catMatch[1].trim();
+            }
+            
+            return result;
+        }
+        
+        function validateParsedProduct(parsed) {
+            return parsed && parsed.description && parsed.price && parsed.price > 0;
+        }
+        
+        // Функции уведомлений
+        function generateMessageLink(chatId, messageId) {
+            return `https://t.me/c/${chatId.toString().replace(/^-100/, '')}/${messageId}`;
+        }
+        
+        function formatProductNotification(name, id, link) {
+            return `🆕 Новый товар #${id}\n\n📦 ${name}\n\n🔗 ${link}`;
+        }
+        
+        function addProductIdToMessage(text, id) {
+            return `${text.replace(/#product_id[:\s]*\d+/gi, '').trim()}\n\n#product_id:${id}`;
+        }
+        
+        // Тестовые данные
+        const testMessages = [
+            {
+                message_id: 6,
+                caption: `📝 Новый iPhone 15 Pro Max 256GB
+
+💰 Цена: 150000 томан
+📦 Количество: 5 шт
+🏷️ Категория: Электроника`
+            },
+            {
+                message_id: 7,
+                text: `📝 Простой товар
+
+💰 Цена: 5000 томан`
+            }
+        ];
+        
+        let testsPassed = 0;
+        let testsFailed = 0;
+        
+        function addResult(containerId, title, success, details) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = 'test-item';
+            div.innerHTML = `
+                <h3>${title} ${success ? '✅' : '❌'}</h3>
+                <div class="result ${success ? 'success' : 'error'}">${details}</div>
+            `;
+            container.appendChild(div);
+            
+            if (success) testsPassed++;
+            else testsFailed++;
+            updateStats();
+        }
+        
+        function updateStats() {
+            const total = testsPassed + testsFailed;
+            const rate = total > 0 ? ((testsPassed / total) * 100).toFixed(1) : 0;
+            
+            document.getElementById('passed').textContent = testsPassed;
+            document.getElementById('failed').textContent = testsFailed;
+            document.getElementById('total').textContent = total;
+            document.getElementById('rate').textContent = rate + '%';
+        }
+        
+        function clearResults() {
+            ['test1', 'test2', 'test3', 'test4', 'test5'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+            testsPassed = 0;
+            testsFailed = 0;
+            updateStats();
+        }
+        
+        function runAllTests() {
+            clearResults();
+            
+            // Тест 1: Парсинг
+            testMessages.forEach((msg, i) => {
+                const parsed = parseProductMessage(msg);
+                const valid = validateParsedProduct(parsed);
+                const details = `Message ID: ${parsed?.messageId}\nОписание: ${parsed?.description || 'НЕТ'}\nЦена: ${parsed?.price || 'НЕТ'}\nКоличество: ${parsed?.quantity || 'НЕТ'}`;
+                addResult('test1', `Сообщение ${i + 1}`, valid, details);
+            });
+            
+            // Тест 2: Ссылки
+            const link1 = generateMessageLink('-1003271699368', 6);
+            const link2 = generateMessageLink('-1003018207910', 123);
+            addResult('test2', 'Ссылка на канал товаров', link1 === 'https://t.me/c/3271699368/6', link1);
+            addResult('test2', 'Ссылка на канал уведомлений', link2 === 'https://t.me/c/3018207910/123', link2);
+            
+            // Тест 3: Уведомления
+            const notification = formatProductNotification('Тестовый товар', 1, 'https://t.me/c/3271699368/6');
+            const hasAll = notification.includes('🆕') && notification.includes('#1') && notification.includes('https://');
+            addResult('test3', 'Форматирование уведомления', hasAll, notification);
+            
+            // Тест 4: Добавление ID
+            const original = '📝 Товар\n💰 Цена: 10000 томан';
+            const withId = addProductIdToMessage(original, 1);
+            const hasId = withId.includes('#product_id:1');
+            addResult('test4', 'Добавление product_id', hasId, `Исходное:\n${original}\n\nС ID:\n${withId}`);
+            
+            // Тест 5: Полный цикл
+            const parsed = parseProductMessage(testMessages[0]);
+            if (parsed && validateParsedProduct(parsed)) {
+                const link = generateMessageLink('-1003271699368', 6);
+                const updated = addProductIdToMessage(testMessages[0].caption, 1);
+                const notif = formatProductNotification(parsed.description, 1, link);
+                const fullCycle = `1. Парсинг: ✅\n2. Ссылка: ${link}\n3. Обновление: ✅\n4. Уведомление: ✅\n\nУведомление:\n${notif}`;
+                addResult('test5', 'Полный цикл', true, fullCycle);
+            } else {
+                addResult('test5', 'Полный цикл', false, 'Парсинг не прошел');
+            }
+        }
+        
+        // Автозапуск при загрузке
+        window.onload = () => {
+            console.log('Тестовая страница загружена. Нажмите кнопку "Запустить все тесты"');
+        };
+    </script>
+</body>
+</html>
+

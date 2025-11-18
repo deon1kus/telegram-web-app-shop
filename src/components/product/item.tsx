@@ -44,46 +44,63 @@ function ProductItem({
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       onClick={handleClick}
-      className={` ${
-        finalPrice && "border-red-700/70"
-      }  flex h-[120px] w-full overflow-hidden  rounded-lg border-2 border-[var(--tg-theme-secondary-bg-color)]`}>
-      <div className="flex w-2/3 flex-col items-center justify-between p-2">
-        <p className="mb-1 ml-auto h-5 w-full select-none text-right ">
-          {title}
-        </p>
-        <div className="flex w-full  flex-col gap-2">
-          {/* <div className="flex items-center justify-between">
-            <div className="rounded-xl bg-[var(--tg-theme-secondary-bg-color)] px-1 pt-1 text-sm ">
-              ⭐4.3
-            </div>
-            <div className="select-none text-sm">еда</div>
-          </div> */}
-          <div
-            className={`flex flex-row gap-3 self-end text-right ${
-              finalPrice && " text-sm text-gray-500 line-through"
-            }`}>
-            <span>томан</span> <span>{addCommas && typeof addCommas === 'function' ? addCommas(safePrice) : safePrice}</span>
-          </div>
-          {finalPrice && (
-            <div className="flex flex-row gap-3 self-end text-right">
-              <span>томан</span> <span>{addCommas && typeof addCommas === 'function' ? addCommas(safeDiscountedPrice) : safeDiscountedPrice}</span>
-            </div>
-          )}
-          {pageType === "admin" && (
-            <div className="self-end  text-left">Количество :{quantity} шт</div>
-          )}
-        </div>
-      </div>
+      className={`flex flex-col w-full overflow-hidden rounded-lg border border-gray-300 bg-white shadow-sm cursor-pointer transition-all hover:shadow-md ${
+        finalPrice && "border-orange-400"
+      }`}
+      style={{ minHeight: '280px' }}>
+      {/* Картинка сверху */}
       <div
-        className=" relative ml-auto h-full  w-1/3 bg-[var(--tg-theme-secondary-bg-color)] bg-cover"
+        className="relative w-full bg-gray-100 bg-cover bg-center"
         style={{
-          backgroundImage: imageURL ? `url('${import.meta.env.VITE_API_URL || ''}/${imageURL}')` : 'none'
+          backgroundImage: imageURL ? `url('${import.meta.env.VITE_API_URL || ''}/${imageURL}')` : 'none',
+          aspectRatio: '1 / 1',
+          minHeight: '160px'
         }}>
         {finalPrice && (
-          <span className="absolute right-0 top-0 rounded-bl-lg bg-red-700 p-2">
-            {finalPrice} %
+          <span className="absolute top-2 right-2 rounded bg-orange-500 text-white px-2 py-1 text-xs font-semibold">
+            -{finalPrice}%
           </span>
         )}
+      </div>
+      
+      {/* Описание снизу */}
+      <div className="flex flex-col p-3 flex-grow justify-between">
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-medium text-gray-900 line-clamp-2 min-h-[40px]">
+            {title}
+          </p>
+          
+          {pageType === "admin" && (
+            <div className="text-xs text-gray-500">
+              Количество: {quantity} шт
+            </div>
+          )}
+        </div>
+        
+        <div className="flex flex-col gap-1 mt-2">
+          {finalPrice ? (
+            <>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 line-through">
+                  {addCommas && typeof addCommas === 'function' ? addCommas(safePrice) : safePrice} томан
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-base font-semibold text-gray-900">
+                  {addCommas && typeof addCommas === 'function' ? addCommas(safeDiscountedPrice) : safeDiscountedPrice}
+                </span>
+                <span className="text-sm text-gray-600">томан</span>
+              </div>
+            </>
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="text-base font-semibold text-gray-900">
+                {addCommas && typeof addCommas === 'function' ? addCommas(safePrice) : safePrice}
+              </span>
+              <span className="text-sm text-gray-600">томан</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

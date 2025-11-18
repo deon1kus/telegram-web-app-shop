@@ -13,7 +13,9 @@ import { NavLink } from "react-router-dom";
 
 function UserProfileButtonMenu() {
   return (
-    <div className=" profile-menu mx-auto flex h-16 w-full max-w-[450px] justify-between rounded-lg  bg-[var(--tg-theme-secondary-bg-color)] p-2  ">
+    <div 
+      className="profile-menu mx-auto flex h-16 w-full max-w-[450px] justify-between rounded-lg p-2"
+      style={{ backgroundColor: '#e5e5e5' }}>
       <NavLink
         to="/profile/home"
         className="flex w-1/3 flex-col items-center justify-center gap-1 rounded-lg  ">

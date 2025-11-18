@@ -17,7 +17,8 @@ const { TextArea } = Input;
 function Edit() {
   const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const { master_id } = useParams();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const location = useLocation();
   const mutationUploadPhotos = useAddMasterImage();
   const mutation = useUpdateMaster({ master_id });

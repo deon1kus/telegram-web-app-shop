@@ -12,7 +12,8 @@ import { useNavigate } from "react-router";
 function AddAddress() {
   const navigate = useNavigate();
   const mutation = useAddAddress();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const onFinish = ({
     city,
     country,
@@ -66,7 +67,7 @@ function AddAddress() {
         <Form.Item
           label="Область"
           name="state"
-          rules={[{ required: true, message: "" }]}>
+          rules={[{ required: true, message: "Пожалуйста, введите область" }]}>
           <Input />
         </Form.Item>
         <Form.Item

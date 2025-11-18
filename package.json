@@ -1,6 +1,6 @@
 {
-  "name": "starter-template",
-  "version": "0.0.1",
+  "name": "telegram-web-app-shop",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,16 @@
     "lint:eslint": "eslint . --ext .ts,.tsx",
     "fix:eslint": "eslint --fix  . --ext .ts,.tsx",
     "lint:stylelint": "stylelint **/*.{css,scss,tsx}",
-    "fix:stylelint": "stylelint --fix ./src/**/*.{css,scss,tsx}"
+    "fix:stylelint": "stylelint --fix ./src/**/*.{css,scss,tsx}",
+    "update-bot": "node scripts/update-bot-config.js",
+    "update-bot:ps1": "powershell -ExecutionPolicy Bypass -File scripts/update-bot-config.ps1",
+    "update-bot:sh": "bash scripts/update-bot-config.sh",
+    "test-channel-parser": "node scripts/test-channel-parser.js",
+    "test-real-message": "node scripts/test-real-message.js",
+    "get-channel-message": "node scripts/get-channel-message-cjs.js",
+    "test-notification-format": "node scripts/test-notification-format.js",
+    "test-all": "node scripts/test-all-systems.js",
+    "check-channel": "node scripts/check-channel-messages.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",

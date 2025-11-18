@@ -43,7 +43,8 @@ function Edit() {
     refetch: productRefetch
   } = useGetProductsById({ product_id });
   const mutation = useUpdateProduct({ product_id });
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const mutationUploadPhotos = useAddProductImage();

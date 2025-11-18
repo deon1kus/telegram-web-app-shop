@@ -13,7 +13,8 @@ function OrderSetting({ orders }: Props) {
   const mutation = useUpdateOrder({ order_id: orders?.order_Id });
   const [status, setStatus] = useState(orders?.order_Status);
   const [tracking_Code, setTracking_Code] = useState(orders?.tracking_Code);
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const onChange = (e) => {
     setStatus(e.target.value);
   };

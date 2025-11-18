@@ -16,7 +16,8 @@ function BotMastersList() {
   const { data, isFetching, isLoading, refetch } = useGetMasters();
   const deleteMutation = useDeleteMaster();
   const location = useLocation();
-  const { id: user_id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const user_id = telegramUser?.id;
   const handleDeleteMaster = (id: string) => {
     deleteMutation.mutate(
       {

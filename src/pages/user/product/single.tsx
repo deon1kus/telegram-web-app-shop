@@ -30,7 +30,8 @@ function ProductSingle() {
   const [count, setCount] = useState(1);
   const { product_id } = useParams();
   const mutation = useAddToCart();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isLoading, refetch, isFetching } = useGetProductsById({
     product_id: product_id || 0
   });

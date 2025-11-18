@@ -18,7 +18,8 @@ function StatusBox({ title, total }: { title: string; total: number }) {
 function UserProfileHome() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { data, isFetching, isLoading, refetch } = useGetUserInfo({
     user_Id: id
   });

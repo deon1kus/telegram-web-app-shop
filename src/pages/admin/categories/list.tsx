@@ -17,32 +17,36 @@ const { confirm } = Modal;
 function List() {
   const { data, error, isLoading, isFetching, refetch } = useGetCategories({});
   const mutationDelete = useDeleteCategories();
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const navigate = useNavigate();
 
   const customizeData = () => {
     const childHandler = (childItem: any[]) => {
-      if (childItem.length > 0) {
-        return childItem.map((item) => {
-          const c = {
-            ...item,
-            key: item.category_Id
-          };
-
-          if (item.children && item.children.length > 0) {
-            c.children = childHandler(item.children);
-          } else {
-            c.children = null;
-          }
-          return c;
-        });
+      if (!childItem || !Array.isArray(childItem) || childItem.length === 0) {
+        return null;
       }
-      return null;
+      return childItem.map((item) => {
+        const c = {
+          ...item,
+          key: item.category_Id
+        };
+
+        if (item.children && Array.isArray(item.children) && item.children.length > 0) {
+          c.children = childHandler(item.children);
+        } else {
+          c.children = null;
+        }
+        return c;
+      });
     };
-    return (data || []).map((item) => ({
+    if (!data || !Array.isArray(data)) {
+      return [];
+    }
+    return data.map((item) => ({
       ...item,
       key: item.category_Id,
-      children: childHandler(item.children)
+      children: childHandler(item.children || [])
     }));
   };
 

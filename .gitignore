@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+channel-integration-steps.log
+channel-message-result.json
 
 # Dependencies
 node_modules
@@ -36,7 +38,9 @@ dist-ssr
 *.py
 *.ps1
 !cleanup_project.ps1
+!scripts/update-bot-config.ps1
 *.sh
+!scripts/update-bot-config.sh
 *.zip
 src_backup_*/
 files_to_translate/

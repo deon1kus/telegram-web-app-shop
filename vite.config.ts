@@ -1,4 +1,20 @@
-/** @type {import('vite').UserConfig} */
+/**
+ * Vite Configuration для Telegram Web App Shop v0.0.2
+ * 
+ * ВАЖНО: Эта конфигурация критична для правильной работы приложения!
+ * 
+ * Основные моменты:
+ * 1. Chunk splitting настроен так, чтобы React загружался первым
+ * 2. Все React-зависимости остаются в основном бандле (index.js)
+ * 3. Только чистые библиотеки (axios, dayjs и т.д.) идут в vendor
+ * 4. Это предотвращает ошибку "Cannot read properties of undefined (reading 'useState')"
+ * 
+ * История исправлений:
+ * - v0.0.1: Первоначальная конфигурация
+ * - v0.0.2: Упрощен chunk splitting для предотвращения ошибок загрузки React
+ * 
+ * @type {import('vite').UserConfig}
+ */
 
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
@@ -18,49 +34,36 @@ export default defineConfig({
     // Оптимизация сборки
     rollupOptions: {
       output: {
-        // Разделение vendor и app кода для лучшей загрузки
-        // ВАЖНО: Упрощенное разделение для предотвращения ошибки useState
+        // КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Упрощенная стратегия для предотвращения ошибки useState
+        // Все React-зависимости остаются в основном бандле (index.js)
+        // Только чистые библиотеки БЕЗ React идут в vendor
         manualChunks: (id) => {
-          // Разделяем node_modules на отдельные чанки
           if (id.includes('node_modules')) {
-            // React и React DOM должны быть вместе и загружаться первыми
-            // ВАЖНО: Все React зависимости в одном чанке
-            if (id.includes('react') || id.includes('react-dom') || id.includes('scheduler')) {
-              return 'react-vendor';
-            }
-            // React Router отдельно, но после React
-            if (id.includes('react-router')) {
-              return 'react-router-vendor';
-            }
-            // React Query отдельно
-            if (id.includes('@tanstack/react-query')) {
-              return 'query-vendor';
-            }
-            // Ant Design отдельно
-            if (id.includes('antd')) {
-              return 'antd-vendor';
-            }
-            // ВАЖНО: Исключаем из vendor ВСЕ что может использовать React
-            // Это критично для предотвращения ошибки "Cannot read properties of undefined (reading 'useState')"
-            // Проверяем что это точно не React зависимость
-            const isReactRelated = id.includes('react') || 
-                                 id.includes('scheduler') || 
-                                 id.includes('jsx-runtime') ||
-                                 id.includes('react/jsx') ||
-                                 id.includes('@vkruglikov') ||
-                                 id.includes('react-telegram') ||
-                                 id.includes('react-images') ||
-                                 id.includes('formik') ||
-                                 id.includes('jotai');
+            // Проверяем, является ли библиотека React-зависимой
+            // ВСЕ React-зависимые библиотеки остаются в основном бандле
+            const isReactRelated = 
+              id.includes('react') ||
+              id.includes('scheduler') ||
+              id.includes('jsx-runtime') ||
+              id.includes('react-router') ||
+              id.includes('react-query') ||
+              id.includes('@tanstack/react-query') ||
+              id.includes('antd') ||
+              id.includes('@vkruglikov') ||
+              id.includes('react-telegram') ||
+              id.includes('react-images') ||
+              id.includes('formik') ||
+              id.includes('jotai');
             
-            // Только чистые библиотеки без React зависимостей идут в vendor
+            // Только чистые библиотеки БЕЗ React идут в vendor
             // Это: axios, dayjs, query-string, clsx, @persian-tools и т.д.
             if (!isReactRelated) {
               return 'vendor';
             }
-            // Все остальное (с React зависимостями) идет в основной бандл (index)
-            // чтобы гарантировать правильный порядок загрузки
-            // Это включает: formik, jotai, react-images-uploading, @vkruglikov/react-telegram-web-app
+            
+            // ВСЕ React-зависимые библиотеки остаются в основном бандле (index.js)
+            // Это гарантирует правильный порядок загрузки и предотвращает ошибку useState
+            return undefined; // undefined означает, что модуль идет в основной бандл
           }
         },
         // Оптимизация имен файлов

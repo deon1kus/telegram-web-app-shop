@@ -1,35 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <script src="/telegram.js" defer></script>
-    <!-- Preconnect для ускорения загрузки -->
-    <link rel="preconnect" href="https://webappshop1.netlify.app" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
     />
-
-    <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    /> -->
+    <meta name="description" content="Telegram Web App Shop" />
+    
+    <!-- Telegram Web App Script - загружается первым -->
+    <script src="/telegram.js"></script>
+    
+    <!-- Preconnect для ускорения загрузки -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Популярные шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    
     <title>PTI7</title>
+    
+    <!-- Критический CSS для предотвращения FOUC (Flash of Unstyled Content) -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: #ffffff;
+        color: #000000;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      #root {
+        min-height: 100vh;
+        width: 100%;
+        position: relative;
+      }
+      /* Скрываем загрузочный экран после загрузки */
+      #root > div:first-child {
+        transition: opacity 0.3s ease;
+      }
+    </style>
   </head>
   <body>
     <div id="root">
-      <div style="padding: 20px; text-align: center; font-family: system-ui, -apple-system, sans-serif;">
-        <div>Загрузка приложения...</div>
-        <div style="font-size: 12px; color: #999; margin-top: 10px;">
-          Если страница не загружается, проверьте консоль браузера (F12)
+      <div style="
+        padding: 20px; 
+        text-align: center; 
+        font-family: Inter, Roboto, system-ui, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        color: #000000;
+      ">
+        <div style="
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          color: #000000;
+        ">Загрузка приложения...</div>
+        <div style="
+          font-size: 12px; 
+          color: #666666; 
+          margin-top: 10px;
+        ">
+          Если загрузка не завершается, проверьте консоль браузера
         </div>
       </div>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
     <!-- Vite автоматически заменит этот путь на правильный после сборки -->
+    <script type="module" src="/src/main.tsx"></script>
     <noscript>
       <div style="padding: 20px; text-align: center;">
         <h2>JavaScript отключен</h2>

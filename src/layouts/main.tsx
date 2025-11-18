@@ -1,8 +1,24 @@
+/**
+ * Главный layout компонент для Telegram Web App Shop v0.0.2
+ * 
+ * ВАЖНО: Настройки ConfigProvider критичны для правильного отображения!
+ * 
+ * Основные настройки:
+ * 1. direction="ltr" - направление текста слева направо (исправлено в v0.0.2)
+ * 2. locale={ru_RU} - русская локаль (исправлено с fa_IR в v0.0.2)
+ * 3. Адаптивная ширина контейнера (максимум 450px для мобильных)
+ * 4. Поддержка темной/светлой темы Telegram
+ * 
+ * История исправлений:
+ * - v0.0.1: Использовалась персидская локаль (fa_IR) и RTL направление
+ * - v0.0.2: Исправлено на русскую локаль (ru_RU) и LTR направление
+ */
+
 /* eslint-disable camelcase */
 /* eslint-disable indent */
 import { useThemeParams } from "@vkruglikov/react-telegram-web-app";
 import { ConfigProvider, theme } from "antd";
-import fa_IR from "antd/lib/locale/fa_IR";
+import ru_RU from "antd/locale/ru_RU";
 import React from "react";
 
 interface Props {
@@ -30,8 +46,8 @@ function Main({ children }: Props) {
       }}>
       <div className="w-full mx-auto" style={{ maxWidth: '450px', width: '100%' }}>
         <ConfigProvider
-          direction="rtl"
-          locale={fa_IR}
+          direction="ltr"
+          locale={ru_RU}
           renderEmpty={customizeRenderEmpty}
           theme={
             themeParams.text_color

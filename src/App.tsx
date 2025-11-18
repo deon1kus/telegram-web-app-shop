@@ -1,3 +1,19 @@
+/**
+ * Главный компонент приложения Telegram Web App Shop v0.0.2
+ * 
+ * ВАЖНО: Инициализация Telegram WebApp критична для работы приложения!
+ * 
+ * Основные функции:
+ * 1. Инициализация Telegram WebApp (ready, expand, цвета)
+ * 2. Настройка React Query для кеширования запросов
+ * 3. Обработка ошибок через ErrorBoundary
+ * 4. Показ загрузочного экрана до готовности
+ * 
+ * История исправлений:
+ * - v0.0.1: Первоначальная версия
+ * - v0.0.2: Улучшена инициализация Telegram, добавлены цвета для светлой темы
+ */
+
 /* eslint-disable indent */
 import "@style/app.scss";
 import "antd/dist/reset.css";
@@ -34,23 +50,42 @@ function App() {
 
   useEffect(() => {
     // Быстрая инициализация - не ждем Telegram
-    const initTimer = setTimeout(() => {
-      setIsReady(true);
-    }, 100);
-
-    if (tgApp) {
-      try {
-        tgApp.ready();
-        tgApp.expand();
-      } catch (error) {
-        // Ошибка инициализации Telegram не критична
-        if (import.meta.env.DEV) {
+    let initTimer: NodeJS.Timeout;
+    
+    try {
+      // Пытаемся инициализировать Telegram WebApp
+      if (tgApp) {
+        try {
+          tgApp.ready();
+          tgApp.expand();
+          // Устанавливаем цветовую схему для светлой темы
+          if (tgApp.setHeaderColor) {
+            tgApp.setHeaderColor('#ffffff');
+          }
+          if (tgApp.setBackgroundColor) {
+            tgApp.setBackgroundColor('#ffffff');
+          }
+        } catch (error) {
+          // Ошибка инициализации Telegram не критична
           console.warn('Telegram WebApp initialization error:', error);
         }
       }
+      
+      // Устанавливаем таймер для показа приложения
+      initTimer = setTimeout(() => {
+        setIsReady(true);
+      }, 150);
+    } catch (error) {
+      // Критическая ошибка - показываем приложение все равно
+      console.error('App initialization error:', error);
+      setIsReady(true);
     }
 
-    return () => clearTimeout(initTimer);
+    return () => {
+      if (initTimer) {
+        clearTimeout(initTimer);
+      }
+    };
   }, [tgApp]);
 
   if (!isReady) {
@@ -61,12 +96,26 @@ function App() {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        background: "#ffffff",
+        color: "#000000",
+        fontFamily: "Inter, Roboto, system-ui, sans-serif"
       }}>
         <div>
-          <div style={{ marginBottom: "10px" }}>Загрузка...</div>
-          <div style={{ fontSize: "12px", color: "#999" }}>
-            Если загрузка не завершается, проверьте консоль браузера (F12)
+          <div style={{ 
+            marginBottom: "10px",
+            fontSize: "18px",
+            fontWeight: "600",
+            color: "#000000"
+          }}>
+            Загрузка...
+          </div>
+          <div style={{ 
+            fontSize: "12px", 
+            color: "#666666",
+            marginTop: "10px"
+          }}>
+            Если загрузка не завершается, проверьте консоль браузера
           </div>
         </div>
       </div>

@@ -16,7 +16,8 @@ function list() {
   const { data, isFetching, isLoading, refetch } = useGetSliders();
   const deleteMutation = useDeleteSlider();
   const location = useLocation();
-  const { id: user_id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const user_id = telegramUser?.id;
   const handleDeleteSlide = (id: string) => {
     deleteMutation.mutate(
       {

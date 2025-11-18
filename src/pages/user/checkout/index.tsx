@@ -21,7 +21,8 @@ function Checkout() {
   const [images, setImages] = useState([]);
   const [imagesLoading, setImagesLoading] = useState(false);
   const [receiptPhoto, setReceiptPhoto] = useState<null | string>(null);
-  const { id } = useTelegramUser();
+  const telegramUser = useTelegramUser();
+  const id = telegramUser?.id;
   const { state: locState } = useLocation();
   const navigate = useNavigate();
   const mutationPhotos = useAddReceiptPhotos();
@@ -95,7 +96,17 @@ function Checkout() {
                     navigator.clipboard.writeText(personCart.cartNumber);
                     message.success("Номер карты скопирован");
                   }}>
-                  <div>Номер карты: {personCart.cartNumber}</div>
+                  <div>
+                    Номер карты: <span className="card-number" style={{ 
+                      fontFamily: "'Courier New', 'Monaco', 'Menlo', monospace",
+                      fontVariantNumeric: 'normal',
+                      unicodeBidi: 'bidi-override',
+                      direction: 'ltr',
+                      letterSpacing: '2px',
+                      color: '#000000',
+                      fontWeight: '600'
+                    }}>{personCart.cartNumber}</span>
+                  </div>
                   <Button>Копировать</Button>
                 </div>
                 <br />
@@ -213,7 +224,10 @@ function Checkout() {
             </Form.Item>
           </Spin>
 
-          <Form.Item name="address" label="Адрес" rules={[{ required: true }]}>
+          <Form.Item 
+            name="address" 
+            label="Адрес" 
+            rules={[{ required: true, message: "Пожалуйста, выберите адрес" }]}>
             <Select
               loading={isFetching || isLoading}
               placeholder="Выберите свой адрес"
