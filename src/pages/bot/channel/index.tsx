@@ -6,6 +6,9 @@ import { useGetChannelPosts } from "@framework/api/channel/get-posts";
 import { useSyncChannel, useGetSyncSettings, useSaveSyncSettings } from "@framework/api/channel/sync";
 import { useParseChannelPost } from "@framework/api/channel/parse-post";
 import { usePublishProductFromChannel } from "@framework/api/channel/publish-product";
+import { useSendTelegramNotification } from "@framework/api/telegram-channel";
+import { generateMessageLink, formatProductNotification } from "@utils/telegram-notifications";
+import { CHANNELS } from "@utils/telegram-notifications";
 import { logError, logInfo, logSuccess } from "@utils/logger";
 import useTelegramUser from "@hooks/useTelegramUser";
 import { useChannelAutoSync } from "@hooks/useChannelAutoSync";
@@ -35,6 +38,7 @@ function ChannelManagement() {
   const saveSettingsMutation = useSaveSyncSettings();
   const parseMutation = useParseChannelPost();
   const publishMutation = usePublishProductFromChannel();
+  const sendNotificationMutation = useSendTelegramNotification();
 
   // Автоматическая синхронизация
   const { isActive: autoSyncActive } = useChannelAutoSync();
@@ -120,11 +124,45 @@ function ChannelManagement() {
       }
 
       // Публикуем товар
-      await publishMutation.mutateAsync({
+      const publishResult = await publishMutation.mutateAsync({
         parsed_product: parsed,
         user_id: userId,
         auto_publish: true
       });
+
+      // Отправляем уведомление в канал
+      if (publishResult.product_id && post.message_id) {
+        try {
+          const messageLink = generateMessageLink(
+            CHANNELS.PRODUCTS.CHAT_ID,
+            post.message_id
+          );
+          
+          const notificationText = formatProductNotification(
+            parsed.product_name,
+            publishResult.product_id,
+            messageLink
+          );
+
+          await sendNotificationMutation.mutateAsync({
+            type: 'product_created',
+            productName: parsed.product_name,
+            productId: publishResult.product_id,
+            messageLink: messageLink,
+            channelChatId: CHANNELS.PRODUCTS.CHAT_ID,
+            messageId: post.message_id
+          });
+
+          logSuccess('ChannelManagement', 'Notification sent', { 
+            product_id: publishResult.product_id,
+            message_id: post.message_id 
+          });
+        } catch (notificationError) {
+          // Логируем ошибку, но не прерываем процесс
+          logError('ChannelManagement', 'Failed to send notification', 
+            notificationError instanceof Error ? notificationError : undefined);
+        }
+      }
 
       message.success('Товар успешно добавлен в магазин');
       logSuccess('ChannelManagement', 'Product published', { product_name: parsed.product_name });
