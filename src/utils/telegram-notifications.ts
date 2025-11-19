@@ -14,8 +14,8 @@ export const CHANNELS = {
     USERNAME: null // Можно добавить если есть публичный username
   },
   NOTIFICATIONS: {
-    CHAT_ID: '-1003271699368', // Канал уведомлений (тот же, где товары)
-    LINK: 'https://t.me/c/3271699368',
+    CHAT_ID: '-1003018207910', // Канал уведомлений (отдельный канал)
+    LINK: 'https://t.me/+vZtVvSSVltwzYmMy',
     USERNAME: null
   }
 };

@@ -25,7 +25,7 @@ const useSendTelegramNotification = () =>
     mutationKey: ["send-telegram-notification"],
     mutationFn: async (data: NotificationData) => {
       const response = await Api.post("/telegram/send-notification", {
-        notification_chat_id: -1003271699368, // Канал уведомлений (тот же, где товары)
+        notification_chat_id: -1003018207910, // Канал уведомлений (отдельный канал: https://t.me/+vZtVvSSVltwzYmMy)
         type: data.type,
         product_name: data.productName,
         product_id: data.productId,
