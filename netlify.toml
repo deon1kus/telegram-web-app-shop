@@ -10,15 +10,21 @@
     NETLIFY_NODE_VERSION = "18"
     # Оптимизация памяти
     NODE_OPTIONS = "--max-old-space-size=4096"
+    # Переменные окружения для сборки
+    NODE_ENV = "production"
+    # Отключаем sourcemaps для ускорения сборки
+    VITE_SOURCEMAP = "false"
 
 # Проксирование API запросов на ваш сервер
 # ВАЖНО: Должно быть ПЕРЕД редиректом для SPA
 # Все запросы к /api/* будут проксироваться на ваш сервер через HTTPS
+# Netlify автоматически использует HTTPS для проксирования
 [[redirects]]
   from = "/api/*"
-  to = "http://194.87.0.193/api/:splat"
+  to = "http://194.87.0.193:8000/api/:splat"
   status = 200
   force = true
+  headers = {X-From = "Netlify"}
 
 # Настройки для SPA (Single Page Application)
 # ВАЖНО: Должно быть ПОСЛЕДНИМ, иначе перехватит все запросы

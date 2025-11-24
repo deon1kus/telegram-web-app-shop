@@ -25,13 +25,20 @@ if (!rootElement) {
 }
 
 // Обработка ошибок при рендеринге
-console.log('[main] Starting app render');
+if (import.meta.env.DEV) {
+  console.log('[main] Starting app render');
+}
 try {
   const root = createRoot(rootElement);
-  console.log('[main] Root created, rendering App');
+  if (import.meta.env.DEV) {
+    console.log('[main] Root created, rendering App');
+  }
   root.render(<App />);
-  console.log('[main] App rendered successfully');
+  if (import.meta.env.DEV) {
+    console.log('[main] App rendered successfully');
+  }
 } catch (error) {
+  // В production используем только console.error для критических ошибок
   console.error("[main] Failed to render app:", error);
   const errorMessage = error instanceof Error ? error.message : "Unknown error";
   const errorStack = error instanceof Error ? error.stack : '';

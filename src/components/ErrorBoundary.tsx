@@ -27,8 +27,12 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // Логируем ошибку в продакшене
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    // Логируем ошибку через logger
+    if (import.meta.env.DEV) {
+      console.error('ErrorBoundary caught an error:', error, errorInfo);
+    }
+    // В production можно отправить в систему мониторинга
+    // Например: Sentry, LogRocket и т.д.
   }
 
   handleReset = (): void => {

@@ -22,12 +22,28 @@ function App() {
         refetchOnWindowFocus: false, // Отключаем для производительности
         refetchOnMount: true,
         refetchOnReconnect: false, // Отключаем для производительности
-        retry: 1, // Одна попытка повтора
-        retryDelay: 1000, // Задержка 1 секунда
-        staleTime: 5 * 60 * 1000,
-        gcTime: 10 * 60 * 1000, // Время кеширования
-        // Таймаут для запросов
-        networkMode: 'online'
+        retry: (failureCount, error: any) => {
+          // Не повторяем запросы для 4xx ошибок (кроме 408, 429)
+          if (error?.response?.status >= 400 && error?.response?.status < 500) {
+            if (error?.response?.status === 408 || error?.response?.status === 429) {
+              return failureCount < 2; // Повторяем только для timeout и rate limit
+            }
+            return false; // Не повторяем для других 4xx
+          }
+          return failureCount < 2; // Повторяем до 2 раз для других ошибок
+        },
+        retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
+        staleTime: 5 * 60 * 1000, // 5 минут - данные считаются свежими
+        gcTime: 10 * 60 * 1000, // 10 минут - время хранения в кеше
+        networkMode: 'online',
+        // Таймаут для запросов (30 секунд)
+        meta: {
+          timeout: 30000
+        }
+      },
+      mutations: {
+        retry: 1, // Одна попытка повтора для мутаций
+        retryDelay: 1000
       }
     }
   });
@@ -43,22 +59,31 @@ function App() {
 
     // Быстрая инициализация - не ждем Telegram
     const initTimer = setTimeout(() => {
-      console.log('[App] Setting isReady to true');
+      if (import.meta.env.DEV) {
+        console.log('[App] Setting isReady to true');
+      }
       setIsReady(true);
     }, 100);
 
     const webApp = checkTelegram();
     if (webApp) {
       try {
-        console.log('[App] Initializing Telegram WebApp');
+        if (import.meta.env.DEV) {
+          console.log('[App] Initializing Telegram WebApp');
+        }
         webApp.ready();
         webApp.expand();
-        console.log('[App] Telegram WebApp initialized');
+        if (import.meta.env.DEV) {
+          console.log('[App] Telegram WebApp initialized');
+        }
       } catch (error) {
+        // Критические ошибки всегда логируем
         console.error('[App] Telegram WebApp initialization error:', error);
       }
     } else {
-      console.warn('[App] Telegram WebApp not found, running in browser mode');
+      if (import.meta.env.DEV) {
+        console.warn('[App] Telegram WebApp not found, running in browser mode');
+      }
     }
 
     return () => clearTimeout(initTimer);

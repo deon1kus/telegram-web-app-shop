@@ -24,7 +24,10 @@ export const useGetSyncSettings = () =>
     fetchSyncSettings,
     {
       staleTime: 10 * 60 * 1000, // 10 минут
-      retry: 1
+      gcTime: 30 * 60 * 1000, // 30 минут в кеше
+      retry: 1,
+      refetchOnWindowFocus: false, // Не обновляем при фокусе окна
+      refetchOnMount: false // Используем кеш при монтировании
     }
   );
 

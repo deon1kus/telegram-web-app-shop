@@ -166,6 +166,9 @@ function ChannelManagement() {
 
       message.success('Товар успешно добавлен в магазин');
       logSuccess('ChannelManagement', 'Product published', { product_name: parsed.product_name });
+      
+      // Обновляем список постов после публикации
+      refetchPosts();
     } catch (error) {
       message.error('Ошибка при публикации товара');
       logError('ChannelManagement', 'Publish failed', error instanceof Error ? error : undefined);
